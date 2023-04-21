@@ -36,6 +36,7 @@ public class MusicPlayer extends JFrame{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		//Four Seasons playist icon
 		ImageIcon fs = new ImageIcon("graphics/Four_seasons_playlist_cover.png");
 		btnFourSeasons = new JButton(fs);
 		btnFourSeasons.addMouseListener(new MouseAdapter() {
