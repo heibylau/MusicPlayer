@@ -55,6 +55,8 @@ public class PlayerFrame extends JFrame {
 		});
 		btnFourSeasons.setBounds(75, 200, 100, 100);
 		contentPane.add(btnFourSeasons);
+
+		//Background button
 		}
 		
 		//Background
