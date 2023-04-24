@@ -15,6 +15,7 @@ public class PlayerFrame extends JFrame {
 	private JPanel contentPane;
 	private JButton btnFourSeasons;
 	private JLabel defaultBackground;
+	private JLabel lblFourSeasons;
 
 	/**
 	 * Launch the application.
@@ -44,7 +45,7 @@ public class PlayerFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		{
+		
 		//Four Seasons playlist button
 		ImageIcon fs = new ImageIcon("graphics/Four_seasons_playlist_cover.png");
 		btnFourSeasons = new JButton(fs);
@@ -55,18 +56,22 @@ public class PlayerFrame extends JFrame {
 		});
 		btnFourSeasons.setBounds(75, 200, 100, 100);
 		contentPane.add(btnFourSeasons);
+		
+		//Four Seasons playlist description
+		lblFourSeasons = new JLabel("Four Seasons");
+		lblFourSeasons.setBounds(85, 300, 200, 20);
+		contentPane.add(lblFourSeasons);
 
 		//Background button
-		}
+		
 		
 		//Background
-		{
 		ImageIcon def = new ImageIcon("background/Default_background.png");
 		defaultBackground = new JLabel(def);
 		defaultBackground.setBounds(0, 0, 400, 600);
 		contentPane.add(defaultBackground);
 		
-		}
+		
 		
 	}
 	
