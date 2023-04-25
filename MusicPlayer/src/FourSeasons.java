@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -8,6 +10,7 @@ import java.util.LinkedList;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -29,9 +32,12 @@ public class FourSeasons extends JDialog {
 	private static final String WINTER1 = "music/Winter_1st_movement.mp3";
 	private static final String WINTER2 = "music/Winter_2nd_movement.mp3";
 	private static final String WINTER3 = "music/Winter_3rd_movement.mp3";
+
+	//button
+	private JButton btnPlay;
 	
-	static ArrayList<String> fileName = new ArrayList<> ();
-	static LinkedList<AudioInputStream> playlist = new LinkedList();
+//	static ArrayList<String> playlist = new ArrayList<> ();
+	static LinkedList<String> playlist = new LinkedList();
 
 	/**
 	 * Create the dialog.
@@ -59,38 +65,75 @@ public class FourSeasons extends JDialog {
 //				buttonPane.add(cancelButton);
 //			}
 //		}
-	}
-	
-	public static void addFileName() {
-		fileName.add(SPRING1);
-		fileName.add(SPRING2);
-		fileName.add(SPRING3);
-		fileName.add(SUMMER1);
-		fileName.add(SUMMER2);
-		fileName.add(SUMMER3);
-		fileName.add(AUTUMN1);
-		fileName.add(AUTUMN2);
-		fileName.add(AUTUMN3);
-		fileName.add(WINTER1);
-		fileName.add(WINTER2);
-		fileName.add(WINTER3);
-	}
-	
-	public static void addMusic() {
-//		InputStream music;
-		for (String name: fileName) {
-			try {
-				AudioInputStream audio = AudioSystem.getAudioInputStream(new File(name));
-				playlist.add(audio);
-			} catch (Exception e) {
-				
+		btnPlay = new JButton("Play");
+		btnPlay.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				btnPlay_mouseClicked(e);
 			}
-		}
-		
+		});
+		btnPlay.setBounds(106, 135, 89, 23);
+		contentPanel.add(btnPlay);
 	}
 	
-	public static void playMusic() {
-		
+	public static void addFile() {
+		playlist.add(SPRING1);
+		playlist.add(SPRING2);
+		playlist.add(SPRING3);
+		playlist.add(SUMMER1);
+		playlist.add(SUMMER2);
+		playlist.add(SUMMER3);
+//		playlist.add(AUTUMN1);
+//		playlist.add(AUTUMN2);
+//		playlist.add(AUTUMN3);
+//		playlist.add(WINTER1);
+//		playlist.add(WINTER2);
+//		playlist.add(WINTER3);
+	}
+	
+//	public static void addMusic() {
+//		for (String name: fileName) {
+//			try {
+//				AudioInputStream audio = AudioSystem.getAudioInputStream(new File(name));
+//				playlist.add(audio);
+//			} catch (Exception e) {
+//				System.out.println(e);
+//			}
+//		}
+//		
+//	}
+	
+	protected void btnPlay_mouseClicked(MouseEvent arg0) {
+		playMusic();
+	}
+	
+	public static Clip toMP3(String location) {
+		try {
+			File music = new File(location);
+			if (music.exists()) {
+				AudioInputStream audio = AudioSystem.getAudioInputStream(music);
+				Clip musicClip = AudioSystem.getClip();
+				musicClip.open(audio);
+				musicClip.start();
+				return musicClip;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	public static void playMusic () {
+		try {
+			for (String fileName : playlist) {
+				System.out.println(fileName);
+				Clip currentClip = toMP3(fileName);
+				while(currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
+					
+				}
+			}
+		} catch(Exception e) {
+			System.out.println(e);
+		}
 	}
 
 }
