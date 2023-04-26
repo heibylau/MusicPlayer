@@ -105,8 +105,8 @@ public class FourSeasons extends JFrame {
 //	}
 	
 	protected void btnPlay_mouseClicked(MouseEvent arg0) {
-//		playMusic();
-		toWAV(OOF);
+		playMusic();
+//		toWAV(OOF);
 	}
 	
 	public static Clip toWAV(String location) {
@@ -117,7 +117,7 @@ public class FourSeasons extends JFrame {
 				Clip musicClip = AudioSystem.getClip();
 				musicClip.open(audio);
 				musicClip.start();
-				musicClip.loop(musicClip.LOOP_CONTINUOUSLY);
+//				musicClip.loop(musicClip.LOOP_CONTINUOUSLY);
 				return musicClip;
 			}
 		} catch (Exception e) {
