@@ -106,7 +106,7 @@ public class FourSeasons extends JDialog {
 		playMusic();
 	}
 	
-	public static Clip toMP3(String location) {
+	public static Clip toWAV(String location) {
 		try {
 			File music = new File(location);
 			if (music.exists()) {
@@ -126,7 +126,7 @@ public class FourSeasons extends JDialog {
 		try {
 			for (String fileName : playlist) {
 				System.out.println(fileName);
-				Clip currentClip = toMP3(fileName);
+				Clip currentClip = toWAV(fileName);
 				while(currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
 					
 				}
