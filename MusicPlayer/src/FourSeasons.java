@@ -12,11 +12,11 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class FourSeasons extends JDialog {
+public class FourSeasons extends JFrame {
 
 	private final JPanel contentPanel = new JPanel();
 	//files
@@ -32,6 +32,7 @@ public class FourSeasons extends JDialog {
 	private static final String WINTER1 = "music/Winter_1st_movement.wav";
 	private static final String WINTER2 = "music/Winter_2nd_movement.wav";
 	private static final String WINTER3 = "music/Winter_3rd_movement.wav";
+	private static final String OOF = "music/Able_sisters.wav";
 
 	//button
 	private JButton btnPlay;
@@ -88,6 +89,7 @@ public class FourSeasons extends JDialog {
 //		playlist.add(WINTER1);
 //		playlist.add(WINTER2);
 //		playlist.add(WINTER3);
+		playlist.add(OOF);
 	}
 	
 //	public static void addMusic() {
@@ -103,7 +105,8 @@ public class FourSeasons extends JDialog {
 //	}
 	
 	protected void btnPlay_mouseClicked(MouseEvent arg0) {
-		playMusic();
+//		playMusic();
+		toWAV(OOF);
 	}
 	
 	public static Clip toWAV(String location) {
@@ -114,6 +117,7 @@ public class FourSeasons extends JDialog {
 				Clip musicClip = AudioSystem.getClip();
 				musicClip.open(audio);
 				musicClip.start();
+				musicClip.loop(musicClip.LOOP_CONTINUOUSLY);
 				return musicClip;
 			}
 		} catch (Exception e) {

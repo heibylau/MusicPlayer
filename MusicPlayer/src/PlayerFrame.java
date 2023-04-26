@@ -78,7 +78,6 @@ public class PlayerFrame extends JFrame {
 	protected void btnFourSeasons_mouseClicked(MouseEvent arg0) {
 		FourSeasons fourSeasons = new FourSeasons();
 		fourSeasons.setLocationRelativeTo(this);
-		fourSeasons.setModalityType(ModalityType.APPLICATION_MODAL);
 		fourSeasons.setVisible(true);
 		this.repaint();
 	}
