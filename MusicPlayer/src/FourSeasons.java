@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.sound.sampled.AudioInputStream;
@@ -105,8 +106,8 @@ public class FourSeasons extends JFrame {
 //	}
 	
 	protected void btnPlay_mouseClicked(MouseEvent arg0) {
-		playMusic();
-//		toWAV(OOF);
+//		playMusic();
+		toWAV(OOF);
 	}
 	
 	public static Clip toWAV(String location) {
@@ -128,6 +129,10 @@ public class FourSeasons extends JFrame {
 	
 	public static void playMusic () {
 		try {
+			Iterator it = playlist.iterator();
+			while (it.hasNext()) {
+				System.out.print(it.next());
+			}
 			for (String fileName : playlist) {
 				System.out.println(fileName);
 				Clip currentClip = toWAV(fileName);
