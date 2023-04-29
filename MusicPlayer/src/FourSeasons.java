@@ -13,6 +13,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -77,9 +78,7 @@ public class FourSeasons extends JFrame {
 		});
 		btnPlay.setBounds(106, 135, 89, 23);
 		contentPanel.add(btnPlay);
-	}
-	
-	public static void addFile() {
+		
 		playlist.add(SPRING1);
 		playlist.add(SPRING2);
 		playlist.add(SPRING3);
@@ -95,33 +94,33 @@ public class FourSeasons extends JFrame {
 		playlist.add(OOF);
 	}
 	
-	
+
 	protected void btnPlay_mouseClicked(MouseEvent arg0) {
-		// playMusic();
-		toWAV(OOF);
+		 playMusic();
+		 
 	}
 
 	
 	public static Clip toWAV(String location) {
-		// try {
-		// 	File music = new File(location);
-		// 	if (music.exists()) {
-		// 		AudioInputStream audio = AudioSystem.getAudioInputStream(music);
-		// 		Clip musicClip = AudioSystem.getClip();
-		// 		musicClip.open(audio);
-		// 		musicClip.start();
-		// 		// Wait for the clip to finish playing
-		// 		while (musicClip.getFramePosition() < musicClip.getFrameLength()) {
-		// 			Thread.sleep(100);
-		// 		}
-		// 		musicClip.stop();
-		// 		musicClip.close();
-		// 		return musicClip;
-		// 	}
-		// } catch (Exception e) {
-		// 	e.printStackTrace();;
-		// }
-		// return null;
+//		 try {
+//		 	File music = new File(location);
+//		 	if (music.exists()) {
+//		 		AudioInputStream audio = AudioSystem.getAudioInputStream(music);
+//		 		Clip musicClip = AudioSystem.getClip();
+//		 		musicClip.open(audio);
+//		 		musicClip.start();
+//		 		// Wait for the clip to finish playing
+//		 		while (musicClip.getFramePosition() < musicClip.getFrameLength()) {
+//		 			Thread.sleep(100);
+//		 		}
+//		 		musicClip.stop();
+//		 		musicClip.close();
+//		 		return musicClip;
+//		 	}
+//		 } catch (Exception e) {
+//		 	e.printStackTrace();;
+//		 }
+//		 return null;
 		try {
 			File music = new File(location);
 			if (music.exists()) {
@@ -129,6 +128,9 @@ public class FourSeasons extends JFrame {
 				Clip musicClip = AudioSystem.getClip();
 				musicClip.open(audio);
 				musicClip.start();
+				while(musicClip.isRunning()) {
+					Thread.sleep(100);
+				}
 //				musicClip.loop(musicClip.LOOP_CONTINUOUSLY);
 				return musicClip;
 			}
@@ -140,11 +142,12 @@ public class FourSeasons extends JFrame {
 	}
 	
 	public static void playMusic () {
+		System.out.println("Playlist size: " + playlist.size());
 		try {
 			Iterator<String> iterator = playlist.iterator();
 			while (iterator.hasNext()) {
 				String fileName = iterator.next();
-				System.out.println(fileName);
+				System.out.println("Playing: " + fileName);
 				Clip currentClip = toWAV(fileName);
 				while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
 					// Wait for the clip to finish playing
@@ -154,5 +157,6 @@ public class FourSeasons extends JFrame {
 			e.printStackTrace();;
 		}
 	}
+	
 
 }
