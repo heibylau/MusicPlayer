@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -39,6 +40,7 @@ public class FourSeasons extends JFrame {
 	private JButton btnPlay;
 	
 //	static ArrayList<String> playlist = new ArrayList<> ();
+	// private Node head;
 	static LinkedList<String> playlist = new LinkedList();
 
 	/**
@@ -93,24 +95,33 @@ public class FourSeasons extends JFrame {
 		playlist.add(OOF);
 	}
 	
-//	public static void addMusic() {
-//		for (String name: fileName) {
-//			try {
-//				AudioInputStream audio = AudioSystem.getAudioInputStream(new File(name));
-//				playlist.add(audio);
-//			} catch (Exception e) {
-//				System.out.println(e);
-//			}
-//		}
-//		
-//	}
 	
 	protected void btnPlay_mouseClicked(MouseEvent arg0) {
-//		playMusic();
+		// playMusic();
 		toWAV(OOF);
 	}
+
 	
 	public static Clip toWAV(String location) {
+		// try {
+		// 	File music = new File(location);
+		// 	if (music.exists()) {
+		// 		AudioInputStream audio = AudioSystem.getAudioInputStream(music);
+		// 		Clip musicClip = AudioSystem.getClip();
+		// 		musicClip.open(audio);
+		// 		musicClip.start();
+		// 		// Wait for the clip to finish playing
+		// 		while (musicClip.getFramePosition() < musicClip.getFrameLength()) {
+		// 			Thread.sleep(100);
+		// 		}
+		// 		musicClip.stop();
+		// 		musicClip.close();
+		// 		return musicClip;
+		// 	}
+		// } catch (Exception e) {
+		// 	e.printStackTrace();;
+		// }
+		// return null;
 		try {
 			File music = new File(location);
 			if (music.exists()) {
@@ -125,23 +136,22 @@ public class FourSeasons extends JFrame {
 			System.out.println(e);
 		}
 		return null;
+
 	}
 	
 	public static void playMusic () {
 		try {
-			Iterator it = playlist.iterator();
-			while (it.hasNext()) {
-				System.out.print(it.next());
-			}
-			for (String fileName : playlist) {
+			Iterator<String> iterator = playlist.iterator();
+			while (iterator.hasNext()) {
+				String fileName = iterator.next();
 				System.out.println(fileName);
 				Clip currentClip = toWAV(fileName);
-				while(currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
-					
+				while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
+					// Wait for the clip to finish playing
 				}
 			}
-		} catch(Exception e) {
-			System.out.println(e);
+		} catch (Exception e) {
+			e.printStackTrace();;
 		}
 	}
 
