@@ -28,12 +28,12 @@ public class FourSeasons extends JFrame {
 	private static final String SUMMER1 = "music/Summer_1st_movement.wav";
 	private static final String SUMMER2 = "music/Summer_2nd_movement.wav";
 	private static final String SUMMER3 = "music/Summer_3rd_movement.wav";
-	private static final String AUTUMN1 = "music/Autumn_1st_movement.wav";
-	private static final String AUTUMN2 = "music/Autumn_2nd_movement.wav";
-	private static final String AUTUMN3 = "music/Autumn_3rd_movement.wav";
-	private static final String WINTER1 = "music/Winter_1st_movement.wav";
-	private static final String WINTER2 = "music/Winter_2nd_movement.wav";
-	private static final String WINTER3 = "music/Winter_3rd_movement.wav";
+//	private static final String AUTUMN1 = "music/Autumn_1st_movement.wav";
+//	private static final String AUTUMN2 = "music/Autumn_2nd_movement.wav";
+//	private static final String AUTUMN3 = "music/Autumn_3rd_movement.wav";
+//	private static final String WINTER1 = "music/Winter_1st_movement.wav";
+//	private static final String WINTER2 = "music/Winter_2nd_movement.wav";
+//	private static final String WINTER3 = "music/Winter_3rd_movement.wav";
 	private static final String OOF = "music/Able_sisters.wav";
 
 	//button
