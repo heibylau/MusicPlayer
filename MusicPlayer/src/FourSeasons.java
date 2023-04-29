@@ -189,6 +189,33 @@ public class FourSeasons extends JFrame {
         });
         playThread.start();
     }
+	
+//	public static void playMusic() {
+//	    stopRequested = false;
+//
+//	    for (String fileName : playlist) {
+//	        if (stopRequested) {
+//	            break;
+//	        }
+//
+//	        if (!paused) {
+//	            currentClip = toWAV(fileName);
+//	            while (currentClip.isRunning()) {
+//	                try {
+//	                    Thread.sleep(100);
+//	                } catch (InterruptedException e) {
+//	                    e.printStackTrace();
+//	                }
+//	            }
+//	        } else {
+//	            try {
+//	                Thread.sleep(100);
+//	            } catch (InterruptedException e) {
+//	                e.printStackTrace();
+//	            }
+//	        }
+//	    }
+//	}
 
     public static void pause() {
         paused = !paused;
