@@ -22,6 +22,10 @@ import javax.swing.border.EmptyBorder;
 public class FourSeasons extends JFrame {
 
 	private final JPanel contentPanel = new JPanel();
+	private static Thread musicThread = null;
+    private static boolean paused = false;
+    private static boolean stopRequested = false;
+	public static long pausedPosition;
 	//files
 	private static final String SPRING1 = "music/Spring_1st_movement.wav";
 	private static final String SPRING2 = "music/Spring_2nd_movement.wav";
@@ -38,6 +42,12 @@ public class FourSeasons extends JFrame {
 
 	//button
 	private JButton btnPlay;
+	private JButton btnPause;
+	private JButton btnResume;
+	
+	
+	//clip
+	public static Clip currentClip;
 	
 //	static ArrayList<String> playlist = new ArrayList<> ();
 	// private Node head;
@@ -78,6 +88,32 @@ public class FourSeasons extends JFrame {
 		btnPlay.setBounds(106, 135, 89, 23);
 		contentPanel.add(btnPlay);
 		
+		btnPause = new JButton("Pause");
+		btnPause.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				btnPause_mouseClicked(e);
+			}
+		});
+		btnPause.setBounds(106, 170, 89, 23);
+		contentPanel.add(btnPause);
+		
+		btnResume = new JButton("Resume");
+		btnResume.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				btnResume_mouseClicked(e);
+			}
+		});
+		btnResume.setBounds(106, 200, 89, 23);
+		contentPanel.add(btnResume);
+		
+		
+		//add files
+		playlist.add(SPRING1);
+		playlist.add(SPRING2);
+		playlist.add(SPRING3);
+		playlist.add(SUMMER1);
+		playlist.add(SUMMER2);
+		playlist.add(SUMMER3);
 
 //		playlist.add(AUTUMN1);
 //		playlist.add(AUTUMN2);
@@ -86,19 +122,19 @@ public class FourSeasons extends JFrame {
 //		playlist.add(WINTER2);
 //		playlist.add(WINTER3);
 	}
-	
-	public void addFile() {
-		playlist.add(SPRING1);
-		playlist.add(SPRING2);
-		playlist.add(SPRING3);
-		playlist.add(SUMMER1);
-		playlist.add(SUMMER2);
-		playlist.add(SUMMER3);
-	}
 
 	protected void btnPlay_mouseClicked(MouseEvent arg0) {
-		addFile();
 		playMusic();
+		 
+	}
+	
+	protected void btnPause_mouseClicked(MouseEvent arg0) {
+		pause();
+		 
+	}
+	
+	protected void btnResume_mouseClicked(MouseEvent arg0) {
+		resume();
 		 
 	}
 
@@ -111,9 +147,9 @@ public class FourSeasons extends JFrame {
 				Clip musicClip = AudioSystem.getClip();
 				musicClip.open(audio);
 				musicClip.start();
-				while(musicClip.isRunning()) {
-					Thread.sleep(100);
-				}
+//				while(musicClip.isRunning()) {
+//					Thread.sleep(100);
+//				}
 				return musicClip;
 			}
 		} catch (Exception e) {
@@ -123,21 +159,62 @@ public class FourSeasons extends JFrame {
 
 	}
 	
-	public static void playMusic () {
-		System.out.println("Playlist size: " + playlist.size());
-		try {
-			Iterator<String> iterator = playlist.iterator();
-			while (iterator.hasNext()) {
-				String fileName = iterator.next();
-				System.out.println("Playing: " + fileName);
-				Clip currentClip = toWAV(fileName);
-				while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
-					// Wait for the clip to finish playing
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();;
-		}
+    public static void playMusic() {
+        stopRequested = false;
+
+        Thread playThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Iterator<String> iterator = playlist.iterator();
+                while (!stopRequested && iterator.hasNext()) {
+                    if (!paused) {
+                        String fileName = iterator.next();
+                        currentClip = toWAV(fileName);
+                        while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } else {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+        playThread.start();
+    }
+
+    public static void pause() {
+        paused = !paused;
+        if (paused) {
+            if (currentClip != null && currentClip.isRunning()) {
+                currentClip.stop();
+            }
+        } else {
+            if (currentClip != null) {
+                currentClip.start();
+            }
+        }
+    }
+
+    public static void stop() {
+        stopRequested = true;
+        if (currentClip != null && currentClip.isRunning()) {
+            currentClip.stop();
+        }
+    }
+
+	public static void resume() {
+	    if (currentClip != null) {
+	        currentClip.start();
+	    }
+
 	}
 	
 
