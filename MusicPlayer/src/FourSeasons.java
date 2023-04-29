@@ -35,7 +35,6 @@ public class FourSeasons extends JFrame {
 //	private static final String WINTER1 = "music/Winter_1st_movement.wav";
 //	private static final String WINTER2 = "music/Winter_2nd_movement.wav";
 //	private static final String WINTER3 = "music/Winter_3rd_movement.wav";
-	private static final String OOF = "music/Able_sisters.wav";
 
 	//button
 	private JButton btnPlay;
@@ -79,48 +78,32 @@ public class FourSeasons extends JFrame {
 		btnPlay.setBounds(106, 135, 89, 23);
 		contentPanel.add(btnPlay);
 		
-		playlist.add(SPRING1);
-		playlist.add(SPRING2);
-		playlist.add(SPRING3);
-		playlist.add(SUMMER1);
-		playlist.add(SUMMER2);
-		playlist.add(SUMMER3);
+
 //		playlist.add(AUTUMN1);
 //		playlist.add(AUTUMN2);
 //		playlist.add(AUTUMN3);
 //		playlist.add(WINTER1);
 //		playlist.add(WINTER2);
 //		playlist.add(WINTER3);
-		playlist.add(OOF);
 	}
 	
+	public void addFile() {
+		playlist.add(SPRING1);
+		playlist.add(SPRING2);
+		playlist.add(SPRING3);
+		playlist.add(SUMMER1);
+		playlist.add(SUMMER2);
+		playlist.add(SUMMER3);
+	}
 
 	protected void btnPlay_mouseClicked(MouseEvent arg0) {
-		 playMusic();
+		addFile();
+		playMusic();
 		 
 	}
 
 	
 	public static Clip toWAV(String location) {
-//		 try {
-//		 	File music = new File(location);
-//		 	if (music.exists()) {
-//		 		AudioInputStream audio = AudioSystem.getAudioInputStream(music);
-//		 		Clip musicClip = AudioSystem.getClip();
-//		 		musicClip.open(audio);
-//		 		musicClip.start();
-//		 		// Wait for the clip to finish playing
-//		 		while (musicClip.getFramePosition() < musicClip.getFrameLength()) {
-//		 			Thread.sleep(100);
-//		 		}
-//		 		musicClip.stop();
-//		 		musicClip.close();
-//		 		return musicClip;
-//		 	}
-//		 } catch (Exception e) {
-//		 	e.printStackTrace();;
-//		 }
-//		 return null;
 		try {
 			File music = new File(location);
 			if (music.exists()) {
@@ -131,7 +114,6 @@ public class FourSeasons extends JFrame {
 				while(musicClip.isRunning()) {
 					Thread.sleep(100);
 				}
-//				musicClip.loop(musicClip.LOOP_CONTINUOUSLY);
 				return musicClip;
 			}
 		} catch (Exception e) {
