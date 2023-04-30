@@ -24,21 +24,21 @@ import javax.swing.border.EmptyBorder;
 public class FourSeasons extends JFrame{
 
 	private final JPanel contentPanel = new JPanel();
-    private static boolean isPaused = false;
+    private boolean isPaused = false;
     
 	//files
-	private static final String SPRING1 = "music/Spring_1st_movement.wav";
-	private static final String SPRING2 = "music/Spring_2nd_movement.wav";
-	private static final String SPRING3 = "music/Spring_3rd_movement.wav";
-	private static final String SUMMER1 = "music/Summer_1st_movement.wav";
-	private static final String SUMMER2 = "music/Summer_2nd_movement.wav";
-	private static final String SUMMER3 = "music/Summer_3rd_movement.wav";
-	private static final String AUTUMN1 = "music/Autumn_1st_movement.wav";
-	private static final String AUTUMN2 = "music/Autumn_2nd_movement.wav";
-	private static final String AUTUMN3 = "music/Autumn_3rd_movement.wav";
-	private static final String WINTER1 = "music/Winter_1st_movement.wav";
-	private static final String WINTER2 = "music/Winter_2nd_movement.wav";
-	private static final String WINTER3 = "music/Winter_3rd_movement.wav";
+	private final String SPRING1 = "music/Spring_1st_movement.wav";
+	private final String SPRING2 = "music/Spring_2nd_movement.wav";
+	private final String SPRING3 = "music/Spring_3rd_movement.wav";
+	private final String SUMMER1 = "music/Summer_1st_movement.wav";
+	private final String SUMMER2 = "music/Summer_2nd_movement.wav";
+	private final String SUMMER3 = "music/Summer_3rd_movement.wav";
+	private final String AUTUMN1 = "music/Autumn_1st_movement.wav";
+	private final String AUTUMN2 = "music/Autumn_2nd_movement.wav";
+	private final String AUTUMN3 = "music/Autumn_3rd_movement.wav";
+	private final String WINTER1 = "music/Winter_1st_movement.wav";
+	private final String WINTER2 = "music/Winter_2nd_movement.wav";
+	private final String WINTER3 = "music/Winter_3rd_movement.wav";
 
 	//button
 	private JButton btnPlay;
@@ -52,7 +52,7 @@ public class FourSeasons extends JFrame{
 	private Clip currentClip;
 	
 	//linkedlist and listIterator
-	static LinkedList<String> playlist = new LinkedList();
+	LinkedList<String> playlist = new LinkedList();
 	
     private ListIterator iterator;
 
