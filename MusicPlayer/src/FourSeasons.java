@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -118,16 +119,17 @@ public class FourSeasons extends JFrame{
 		playlist.add(SUMMER1);
 		playlist.add(SUMMER2);
 		playlist.add(SUMMER3);
-		
-		iterator = playlist.listIterator();
-		currentClip = null;
-
 //		playlist.add(AUTUMN1);
 //		playlist.add(AUTUMN2);
 //		playlist.add(AUTUMN3);
 //		playlist.add(WINTER1);
 //		playlist.add(WINTER2);
 //		playlist.add(WINTER3);
+		
+		iterator = playlist.listIterator();
+		currentClip = null;
+
+
 	}
 
 	protected void btnPlay_mouseClicked(MouseEvent arg0) {
