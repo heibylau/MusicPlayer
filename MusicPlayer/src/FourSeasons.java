@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -19,13 +20,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class FourSeasons extends JFrame {
+public class FourSeasons extends JFrame{
 
 	private final JPanel contentPanel = new JPanel();
-	private static Thread musicThread = null;
-    private static boolean paused = false;
-    private static boolean stopRequested = false;
-	public static long pausedPosition;
+    private static boolean isPaused = false;
+    
 	//files
 	private static final String SPRING1 = "music/Spring_1st_movement.wav";
 	private static final String SPRING2 = "music/Spring_2nd_movement.wav";
@@ -44,18 +43,18 @@ public class FourSeasons extends JFrame {
 	private JButton btnPlay;
 	private JButton btnPause;
 	private JButton btnResume;
+	private JButton btnPrevious;
+	private JButton btnNext;
 	
 	
 	//clip
-	public static Clip currentClip;
+	private Clip currentClip;
 	
-//	static ArrayList<String> playlist = new ArrayList<> ();
-	// private Node head;
+	//linkedlist and listIterator
 	static LinkedList<String> playlist = new LinkedList();
+	
+    private ListIterator iterator;
 
-	/**
-	 * Create the dialog.
-	 */
 	public FourSeasons() {
 		setBounds(100, 100, 400, 600);
 		getContentPane().setLayout(new BorderLayout());
@@ -63,22 +62,8 @@ public class FourSeasons extends JFrame {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-//		{
-//			JPanel buttonPane = new JPanel();
-//			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-//			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-//			{
-//				JButton okButton = new JButton("OK");
-//				okButton.setActionCommand("OK");
-//				buttonPane.add(okButton);
-//				getRootPane().setDefaultButton(okButton);
-//			}
-//			{
-//				JButton cancelButton = new JButton("Cancel");
-//				cancelButton.setActionCommand("Cancel");
-//				buttonPane.add(cancelButton);
-//			}
-//		}
+		
+		//JButton
 		btnPlay = new JButton("Play");
 		btnPlay.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -104,7 +89,26 @@ public class FourSeasons extends JFrame {
 			}
 		});
 		btnResume.setBounds(106, 200, 89, 23);
+		btnResume.setVisible(false);
 		contentPanel.add(btnResume);
+		
+		btnPrevious = new JButton("Previous");
+		btnPrevious.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				btnPrevious_mouseClicked(e);
+			}
+		});
+		btnPrevious.setBounds(106, 230, 89, 23);
+		contentPanel.add(btnPrevious);
+		
+		btnNext = new JButton("Next");
+		btnNext.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				btnNext_mouseClicked(e);
+			}
+		});
+		btnNext.setBounds(106, 270, 89, 23);
+		contentPanel.add(btnNext);
 		
 		
 		//add files
@@ -114,6 +118,9 @@ public class FourSeasons extends JFrame {
 		playlist.add(SUMMER1);
 		playlist.add(SUMMER2);
 		playlist.add(SUMMER3);
+		
+		iterator = playlist.listIterator();
+		currentClip = null;
 
 //		playlist.add(AUTUMN1);
 //		playlist.add(AUTUMN2);
@@ -125,6 +132,8 @@ public class FourSeasons extends JFrame {
 
 	protected void btnPlay_mouseClicked(MouseEvent arg0) {
 		playMusic();
+		btnPlay.setVisible(false);
+		btnResume.setVisible(true);
 		 
 	}
 	
@@ -137,6 +146,16 @@ public class FourSeasons extends JFrame {
 		resume();
 		 
 	}
+	
+	protected void btnPrevious_mouseClicked(MouseEvent arg0) {
+		previous();
+		 
+	}
+	
+	protected void btnNext_mouseClicked(MouseEvent arg0) {
+		next();
+		 
+	}
 
 	
 	public static Clip toWAV(String location) {
@@ -146,10 +165,6 @@ public class FourSeasons extends JFrame {
 				AudioInputStream audio = AudioSystem.getAudioInputStream(music);
 				Clip musicClip = AudioSystem.getClip();
 				musicClip.open(audio);
-				musicClip.start();
-//				while(musicClip.isRunning()) {
-//					Thread.sleep(100);
-//				}
 				return musicClip;
 			}
 		} catch (Exception e) {
@@ -159,17 +174,16 @@ public class FourSeasons extends JFrame {
 
 	}
 	
-    public static void playMusic() {
-        stopRequested = false;
+    public void playMusic() {
+        isPaused = false;
 
         Thread playThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Iterator<String> iterator = playlist.iterator();
-                while (!stopRequested && iterator.hasNext()) {
-                    if (!paused) {
-                        String fileName = iterator.next();
+                while (!isPaused && iterator.hasNext()) {
+                        String fileName = (String) iterator.next();
                         currentClip = toWAV(fileName);
+        				currentClip.start();
                         while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
                             try {
                                 Thread.sleep(100);
@@ -177,72 +191,48 @@ public class FourSeasons extends JFrame {
                                 e.printStackTrace();
                             }
                         }
-                    } else {
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
                 }
             }
         });
         playThread.start();
     }
 	
-//	public static void playMusic() {
-//	    stopRequested = false;
-//
-//	    for (String fileName : playlist) {
-//	        if (stopRequested) {
-//	            break;
-//	        }
-//
-//	        if (!paused) {
-//	            currentClip = toWAV(fileName);
-//	            while (currentClip.isRunning()) {
-//	                try {
-//	                    Thread.sleep(100);
-//	                } catch (InterruptedException e) {
-//	                    e.printStackTrace();
-//	                }
-//	            }
-//	        } else {
-//	            try {
-//	                Thread.sleep(100);
-//	            } catch (InterruptedException e) {
-//	                e.printStackTrace();
-//	            }
-//	        }
-//	    }
-//	}
 
-    public static void pause() {
-        paused = !paused;
-        if (paused) {
-            if (currentClip != null && currentClip.isRunning()) {
-                currentClip.stop();
-            }
-        } else {
-            if (currentClip != null) {
-                currentClip.start();
-            }
-        }
-    }
-
-    public static void stop() {
-        stopRequested = true;
+    public void pause() {
+        isPaused = true;
         if (currentClip != null && currentClip.isRunning()) {
             currentClip.stop();
         }
     }
 
-	public static void resume() {
+	public void resume() {
 	    if (currentClip != null) {
 	        currentClip.start();
 	    }
 
 	}
+	
+	public void previous() {
+        pause();
+		if (iterator.hasPrevious()) {
+            currentClip = toWAV((String) iterator.previous());
+		} else {
+			currentClip = toWAV(playlist.get(playlist.size() - 1));
+		}
+        resume();
+
+    }
+
+    public void next() {
+        pause();
+		if (iterator.hasNext()) {
+            currentClip = toWAV((String) iterator.next());
+		} else {
+			currentClip = toWAV(playlist.get(0));
+		}
+		resume();
+    }
+
 	
 
 }
