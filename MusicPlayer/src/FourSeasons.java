@@ -46,6 +46,7 @@ public class FourSeasons extends JFrame{
 	private JButton btnResume;
 	private JButton btnPrevious;
 	private JButton btnNext;
+	private JButton btnLoop;
 	
 	
 	//clip
@@ -111,6 +112,15 @@ public class FourSeasons extends JFrame{
 		btnNext.setBounds(106, 270, 89, 23);
 		contentPanel.add(btnNext);
 		
+		btnLoop = new JButton("Loop");
+		btnLoop.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				btnLoop_mouseClicked(e);
+			}
+		});
+		btnLoop.setBounds(106, 270, 89, 23);
+		contentPanel.add(btnLoop);
+		
 		
 		//add files
 		playlist.add(SPRING1);
@@ -157,6 +167,10 @@ public class FourSeasons extends JFrame{
 	protected void btnNext_mouseClicked(MouseEvent arg0) {
 		next();
 		 
+	}
+	
+	protected void btnLoop_mouseClicked(MouseEvent arg0) {
+		
 	}
 
 	
