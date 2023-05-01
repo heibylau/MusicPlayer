@@ -58,6 +58,7 @@ public class FourSeasons extends JFrame{
     private ListIterator iterator;
 
 	public FourSeasons() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 400, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
