@@ -32,6 +32,7 @@ public class CircularLinkedList implements ListIterator{
 	}
 	
 	public ListIterator listIterator() {
+		pointerNode = new Node(null, head, head.next);
 		return this;
 	}
 
@@ -41,10 +42,10 @@ public class CircularLinkedList implements ListIterator{
 
 	public Object next() {	
 
-		if (pointerNode == null) {
-			pointerNode = new Node(null, head, head.next);
-			return pointerNode.previous.value;
-		} 
+//		if (pointerNode == null) {
+//			pointerNode = new Node(null, head, head.next);
+//			return pointerNode.previous.value;
+//		} 
 		
 		if(hasNext() == false) {
 			throw new NoSuchElementException();

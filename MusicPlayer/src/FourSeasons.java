@@ -204,6 +204,13 @@ public class FourSeasons extends JFrame{
 //
 //	    loopThread.start();
 		playlist.loop();
+		while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
+            try {
+                Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+        }
 	}
 
 	
@@ -230,21 +237,22 @@ public class FourSeasons extends JFrame{
             @Override
             public void run() {
 //                    String fileName = (String) iterator.next();
-                String fileName = (String) iterator.next();
-                currentClip = toWAV(fileName);
-                currentClip.start();
+//                String fileName = (String) iterator.next();
+//                currentClip = toWAV(fileName);
+//                currentClip.start();
                 while (!isPaused && iterator.hasNext()) {
-                	fileName = (String) iterator.next();
+                	String fileName = (String) iterator.next();
                     currentClip = toWAV(fileName);
                     currentClip.start();
+                    while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
+                        try {
+                            Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                    }
                 }
-                while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
-                    try {
-                        Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                }
+
             }
         });
         playThread.start();
