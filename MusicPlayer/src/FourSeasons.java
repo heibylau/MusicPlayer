@@ -152,7 +152,7 @@ public class FourSeasons extends JFrame{
 		playlist.addMusic(WINTER2);
 		playlist.addMusic(WINTER3);
 		
-//		iterator = playlist.listIterator();
+		iterator = playlist.listIterator();
 		currentClip = null;
 
 
@@ -230,18 +230,20 @@ public class FourSeasons extends JFrame{
             @Override
             public void run() {
 //                    String fileName = (String) iterator.next();
-                	String fileName = (String) playlist.next();
-                while (!isPaused && playlist.hasNext()) {
-                	fileName = (String) playlist.next();
+                String fileName = (String) iterator.next();
+                currentClip = toWAV(fileName);
+                currentClip.start();
+                while (!isPaused && iterator.hasNext()) {
+                	fileName = (String) iterator.next();
                     currentClip = toWAV(fileName);
                     currentClip.start();
-                    while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
-                        try {
-                            Thread.sleep(100);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                    }
+                }
+                while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
+                    try {
+                        Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                 }
             }
         });
@@ -266,7 +268,7 @@ public class FourSeasons extends JFrame{
 	public void previous() {
         pause();
 		if (playlist.hasPrevious()) {
-            currentClip = toWAV((String) playlist.previous());
+            currentClip = toWAV((String) iterator.previous());
 		}
         resume();
 
@@ -275,7 +277,7 @@ public class FourSeasons extends JFrame{
     public void next() {
         pause();
 		if (iterator.hasNext()) {
-            currentClip = toWAV((String) playlist.next());
+            currentClip = toWAV((String) iterator.next());
 		}
 		resume();
     }
