@@ -53,7 +53,9 @@ public class FourSeasons extends JFrame{
 	private Clip currentClip;
 	
 	//linkedlist and listIterator
-	LinkedList<String> playlist = new LinkedList();
+//	LinkedList<String> playlist = new LinkedList();
+	CircularLinkedList playlist = new CircularLinkedList();
+			
 	
     private ListIterator iterator;
 
@@ -124,20 +126,33 @@ public class FourSeasons extends JFrame{
 		
 		
 		//add files
-		playlist.add(SPRING1);
-		playlist.add(SPRING2);
-		playlist.add(SPRING3);
-		playlist.add(SUMMER1);
-		playlist.add(SUMMER2);
-		playlist.add(SUMMER3);
-		playlist.add(AUTUMN1);
-		playlist.add(AUTUMN2);
-		playlist.add(AUTUMN3);
-		playlist.add(WINTER1);
-		playlist.add(WINTER2);
-		playlist.add(WINTER3);
+//		playlist.add(SPRING1);
+//		playlist.add(SPRING2);
+//		playlist.add(SPRING3);
+//		playlist.add(SUMMER1);
+//		playlist.add(SUMMER2);
+//		playlist.add(SUMMER3);
+//		playlist.add(AUTUMN1);
+//		playlist.add(AUTUMN2);
+//		playlist.add(AUTUMN3);
+//		playlist.add(WINTER1);
+//		playlist.add(WINTER2);
+//		playlist.add(WINTER3);
 		
-		iterator = playlist.listIterator();
+		playlist.addMusic(SPRING1);
+		playlist.addMusic(SPRING2);
+		playlist.addMusic(SPRING3);
+		playlist.addMusic(SUMMER1);
+		playlist.addMusic(SUMMER2);
+		playlist.addMusic(SUMMER3);
+		playlist.addMusic(AUTUMN1);
+		playlist.addMusic(AUTUMN2);
+		playlist.addMusic(AUTUMN3);
+		playlist.addMusic(WINTER1);
+		playlist.addMusic(WINTER2);
+		playlist.addMusic(WINTER3);
+		
+//		iterator = playlist.listIterator();
 		currentClip = null;
 
 
@@ -171,24 +186,24 @@ public class FourSeasons extends JFrame{
 	}
 	
 	protected void btnLoop_mouseClicked(MouseEvent arg0) {
-	    Thread loopThread = new Thread(new Runnable() {
-	        @Override
-	        public void run() {
-	            while (!isPaused) {
-	                if (!currentClip.isRunning()) {
-	                    if (!iterator.hasNext()) {
-	                        iterator = playlist.listIterator();
-	                    }
-	                    String fileName = (String) iterator.next();
-	                    currentClip = toWAV(fileName);
-	                    currentClip.start();
-	                }
-	            }
-	        }
-	    });
-
-	    loopThread.start();
-		
+//	    Thread loopThread = new Thread(new Runnable() {
+//	        @Override
+//	        public void run() {
+//	            while (!isPaused) {
+//	                if (!currentClip.isRunning()) {
+//	                    if (!iterator.hasNext()) {
+//	                        iterator = playlist.listIterator();
+//	                    }
+//	                    String fileName = (String) iterator.next();
+//	                    currentClip = toWAV(fileName);
+//	                    currentClip.start();
+//	                }
+//	            }
+//	        }
+//	    });
+//
+//	    loopThread.start();
+		playlist.loop();
 	}
 
 	
@@ -214,8 +229,10 @@ public class FourSeasons extends JFrame{
         Thread playThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (!isPaused && iterator.hasNext()) {
-                    String fileName = (String) iterator.next();
+//                    String fileName = (String) iterator.next();
+                	String fileName = (String) playlist.next();
+                while (!isPaused && playlist.hasNext()) {
+                	fileName = (String) playlist.next();
                     currentClip = toWAV(fileName);
                     currentClip.start();
                     while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
@@ -248,8 +265,8 @@ public class FourSeasons extends JFrame{
 	
 	public void previous() {
         pause();
-		if (iterator.hasPrevious()) {
-            currentClip = toWAV((String) iterator.previous());
+		if (playlist.hasPrevious()) {
+            currentClip = toWAV((String) playlist.previous());
 		}
         resume();
 
@@ -258,7 +275,7 @@ public class FourSeasons extends JFrame{
     public void next() {
         pause();
 		if (iterator.hasNext()) {
-            currentClip = toWAV((String) iterator.next());
+            currentClip = toWAV((String) playlist.next());
 		}
 		resume();
     }
