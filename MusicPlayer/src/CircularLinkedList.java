@@ -1,4 +1,3 @@
-import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 public class CircularLinkedList {
@@ -24,7 +23,7 @@ public class CircularLinkedList {
 				current = current.next;
 			}
 						
-			current.next = newNode;
+			tail = current.next = newNode;
 			newNode.previous = current;
 		}
 	}
@@ -51,6 +50,9 @@ public class CircularLinkedList {
 	}
 
 	public boolean hasPrevious() {
+		if (pointerNode == null) {
+			pointerNode = new Node(null, head, head.next);
+		}
 		return pointerNode.previous != null;
 	}
 	
@@ -66,9 +68,6 @@ public class CircularLinkedList {
 	}
 	
 	public void loop() {
-		while(hasNext()) {
-			tail = pointerNode.next;
-		}
 		tail.next = head;
 		head.previous = tail;
 	}

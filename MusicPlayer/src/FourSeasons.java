@@ -186,31 +186,13 @@ public class FourSeasons extends JFrame{
 	}
 	
 	protected void btnLoop_mouseClicked(MouseEvent arg0) {
-//	    Thread loopThread = new Thread(new Runnable() {
-//	        @Override
-//	        public void run() {
-//	            while (!isPaused) {
-//	                if (!currentClip.isRunning()) {
-//	                    if (!iterator.hasNext()) {
-//	                        iterator = playlist.listIterator();
-//	                    }
-//	                    String fileName = (String) iterator.next();
-//	                    currentClip = toWAV(fileName);
-//	                    currentClip.start();
-//	                }
-//	            }
-//	        }
-//	    });
-//
-//	    loopThread.start();
-//
-//		while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
-//            try {
-//                Thread.sleep(100);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//        }
+		Thread loopThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                playlist.loop();
+            }
+        });
+        loopThread.start();
 	}
 
 	
