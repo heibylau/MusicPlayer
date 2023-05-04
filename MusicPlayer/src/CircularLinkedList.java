@@ -72,4 +72,9 @@ public class CircularLinkedList {
 		head.previous = tail;
 	}
 	
+	public void unLoop() {
+		tail.next = null;
+		head.previous = null;
+	}
+	
 }
