@@ -10,8 +10,4 @@ public class Node {
 		this.next = next;
 	}
 	
-	public String getValue()
-	{
-		return this.value;
-	}
 }
