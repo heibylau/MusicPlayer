@@ -5,6 +5,7 @@ public class CircularLinkedList {
 	Node pointerNode;
 	Node lastNode;
 	Node tail;
+	
 	public void addMusic(String filePath) {
 		Node newNode = new Node(filePath, null , null);
 		Node current = head;
@@ -37,15 +38,20 @@ public class CircularLinkedList {
 	}
 
 	public Object next() {	
-		
 		if(hasNext() == false) {
 			throw new NoSuchElementException();
 		}
+		Object value = null;
+		try {
+			pointerNode.previous = pointerNode.next;
+			pointerNode.next = pointerNode.next.next;
+			lastNode = pointerNode.previous;
+			value = lastNode.previous.value;
+		} catch (Exception e) {
+			System.out.println("End of list");
+		}
 		
-		pointerNode.previous = pointerNode.next;
-		pointerNode.next = pointerNode.next.next;
-		lastNode = pointerNode.previous;
-		return lastNode.previous.value;
+		return value;
 
 	}
 
@@ -60,10 +66,16 @@ public class CircularLinkedList {
 		if(hasPrevious() == false) {
 			throw new NoSuchElementException();
 		}
-		pointerNode.next = pointerNode.previous;
-		pointerNode.previous = pointerNode.previous.previous;
-		lastNode = pointerNode.next;
-		return lastNode.previous.value;
+		Object value = null;
+		try {
+			pointerNode.next = pointerNode.previous;
+			pointerNode.previous = pointerNode.previous.previous;
+			lastNode = pointerNode.next;
+			value = lastNode.previous.value;
+		} catch (Exception e) {
+			System.out.println("End of list");
+		}
+		return value;
 
 	}
 	

@@ -25,6 +25,7 @@ public class FourSeasons extends JFrame{
 
 	private final JPanel contentPanel = new JPanel();
     private boolean isPaused = false;
+    private boolean isLooped = false;
     
 	//files
 	private final String SPRING1 = "music/Spring_1st_movement.wav";
@@ -126,19 +127,6 @@ public class FourSeasons extends JFrame{
 		
 		
 		//add files
-//		playlist.add(SPRING1);
-//		playlist.add(SPRING2);
-//		playlist.add(SPRING3);
-//		playlist.add(SUMMER1);
-//		playlist.add(SUMMER2);
-//		playlist.add(SUMMER3);
-//		playlist.add(AUTUMN1);
-//		playlist.add(AUTUMN2);
-//		playlist.add(AUTUMN3);
-//		playlist.add(WINTER1);
-//		playlist.add(WINTER2);
-//		playlist.add(WINTER3);
-		
 		playlist.addMusic(SPRING1);
 		playlist.addMusic(SPRING2);
 		playlist.addMusic(SPRING3);
@@ -151,7 +139,6 @@ public class FourSeasons extends JFrame{
 		playlist.addMusic(WINTER1);
 		playlist.addMusic(WINTER2);
 		playlist.addMusic(WINTER3);
-//		playlist.loop();
 		
 		currentClip = null;
 
@@ -189,7 +176,16 @@ public class FourSeasons extends JFrame{
 		Thread loopThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                playlist.loop();
+            	if (!isLooped) {
+                    playlist.loop(); 
+            		isLooped = true;
+            		System.out.println("looping");
+            	} else {
+            		playlist.unLoop();
+            		isLooped = false;
+            		System.out.println("unlooped");
+            	}
+
             }
         });
         loopThread.start();
@@ -218,19 +214,22 @@ public class FourSeasons extends JFrame{
         Thread playThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (!isPaused && playlist.hasNext()) {
-                	String fileName = (String) playlist.next();
-                    currentClip = toWAV(fileName);
-                    currentClip.start();
-                    while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
-                        try {
-                            Thread.sleep(100);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+            	try {
+                    while (!isPaused && playlist.hasNext()) {
+                    	String fileName = (String) playlist.next();
+                        currentClip = toWAV(fileName);
+                        currentClip.start();
+                        while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
+                            try {
+                                Thread.sleep(100);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                        }
                     }
-                }
-
+            	} catch (Exception e) {
+            		System.out.println("no music playing");
+            	}
             }
         });
         playThread.start();
