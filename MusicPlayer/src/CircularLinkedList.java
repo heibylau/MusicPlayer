@@ -5,6 +5,7 @@ public class CircularLinkedList {
 	Node pointerNode;
 	Node lastNode;
 	Node tail;
+	boolean isLooped;
 	
 	public void addMusic(String filePath) {
 		Node newNode = new Node(filePath, null , null);
@@ -34,7 +35,11 @@ public class CircularLinkedList {
 		if (pointerNode == null) {
 			pointerNode = new Node(null, head, head.next);
 		}
-		return pointerNode.next != null;
+		if (isLooped == true) {
+			return true;
+		} else {
+			return pointerNode.next != null;
+		}
 	}
 
 	public Object next() {	
@@ -82,11 +87,13 @@ public class CircularLinkedList {
 	public void loop() {
 		tail.next = head;
 		head.previous = tail;
+		isLooped = true;
 	}
 	
 	public void unLoop() {
 		tail.next = null;
 		head.previous = null;
+		isLooped = false;
 	}
 	
 }

@@ -94,7 +94,7 @@ public class FourSeasons extends JFrame{
 				btnResume_mouseClicked(e);
 			}
 		});
-		btnResume.setBounds(106, 200, 89, 23);
+		btnResume.setBounds(106, 170, 89, 23);
 		btnResume.setVisible(false);
 		contentPanel.add(btnResume);
 		
@@ -154,11 +154,14 @@ public class FourSeasons extends JFrame{
 	
 	protected void btnPause_mouseClicked(MouseEvent arg0) {
 		pause();
-		 
+		btnPause.setVisible(false);
+		btnResume.setVisible(true);
 	}
 	
 	protected void btnResume_mouseClicked(MouseEvent arg0) {
 		resume();
+		btnResume.setVisible(false);
+		btnPause.setVisible(true);
 		 
 	}
 	
@@ -217,6 +220,7 @@ public class FourSeasons extends JFrame{
             	try {
                     while (!isPaused && playlist.hasNext()) {
                     	String fileName = (String) playlist.next();
+                    	System.out.println(fileName);
                         currentClip = toWAV(fileName);
                         currentClip.start();
                         while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
