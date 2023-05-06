@@ -26,6 +26,8 @@ public class FourSeasons extends JFrame{
 	private final JPanel contentPanel = new JPanel();
     private boolean isPaused = false;
     private boolean isLooped = false;
+    private long clipPosition = 0;
+    private String fileName = null;
     
 	//files
 	private final String SPRING1 = "music/Spring_1st_movement.wav";
@@ -49,16 +51,11 @@ public class FourSeasons extends JFrame{
 	private JButton btnNext;
 	private JButton btnLoop;
 	
-	
 	//clip
 	private Clip currentClip;
 	
-	//linkedlist and listIterator
-//	LinkedList<String> playlist = new LinkedList();
+	//LinkedList
 	CircularLinkedList playlist = new CircularLinkedList();
-			
-	
-    private ListIterator iterator;
 
 	public FourSeasons() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -219,10 +216,23 @@ public class FourSeasons extends JFrame{
             public void run() {
             	try {
                     while (!isPaused && playlist.hasNext()) {
-                    	String fileName = (String) playlist.next();
-                    	System.out.println(fileName);
-                        currentClip = toWAV(fileName);
-                        currentClip.start();
+                    	if (fileName == null) {
+                    		fileName = playlist.getHead();
+                        	System.out.println(fileName);
+                            currentClip = toWAV(fileName);
+                            if (clipPosition != 0) {
+                            	currentClip.setMicrosecondPosition(clipPosition);
+                            }
+                            currentClip.start();
+                    	} else {
+                    		System.out.println(fileName);
+                    		currentClip = toWAV(fileName);
+                    		if (clipPosition != 0) {
+                            	currentClip.setMicrosecondPosition(clipPosition);
+                            }
+                            currentClip.start();
+                    	}
+                    	
                         while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
                             try {
                                 Thread.sleep(100);
@@ -230,6 +240,10 @@ public class FourSeasons extends JFrame{
                                     e.printStackTrace();
                                 }
                         }
+                        if (currentClip.getMicrosecondLength() == currentClip.getMicrosecondPosition()) {
+                    		fileName = (String) playlist.next();
+                        }
+
                     }
             	} catch (Exception e) {
             		System.out.println("no music playing");
@@ -245,30 +259,34 @@ public class FourSeasons extends JFrame{
         if (currentClip != null && currentClip.isRunning()) {
             currentClip.stop();
         }
+        clipPosition = currentClip.getMicrosecondPosition();
     }
 
 	public void resume() {
 	    if (currentClip != null) {
-	        currentClip.start();
+	        playMusic();
 	    }
 
 	}
 	
 	public void previous() {
         pause();
-		if (playlist.hasPrevious()) {
-            currentClip = toWAV((String) playlist.previous());
-		}
-        resume();
+        if (playlist.hasPrevious()) {
+            clipPosition = 0;
+            fileName = (String) playlist.previous();
+            playMusic();
+        }
+
 
     }
 
     public void next() {
         pause();
-		if (playlist.hasNext()) {
-            currentClip = toWAV((String) playlist.next());
-		}
-		resume();
+        if (playlist.hasNext()) {
+            clipPosition = 0;
+            fileName = (String) playlist.next();
+            playMusic();
+        }
     }
 
 	
