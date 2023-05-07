@@ -112,7 +112,7 @@ public class TestPlaylist extends JFrame {
 		playlist.addMusic(CLAUDIO_THE_WORM);
 		playlist.addMusic(GET_OUTSIDE);
 		playlist.addMusic(SPRING_IN_MY_STEP);
-		playlist.addMusic(MR_PINK);
+//		playlist.addMusic(MR_PINK);
 		
 		currentClip = null;
 
