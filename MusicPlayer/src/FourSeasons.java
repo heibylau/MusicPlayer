@@ -28,6 +28,7 @@ public class FourSeasons extends JFrame{
     private boolean isLooped = false;
     private long clipPosition = 0;
     private String fileName = null;
+    Thread playThread;
     
 	//files
 	private final String SPRING1 = "music/Spring_1st_movement.wav";
@@ -211,7 +212,7 @@ public class FourSeasons extends JFrame{
     public void playMusic() {
         isPaused = false;
 
-        Thread playThread = new Thread(new Runnable() {
+        playThread = new Thread(new Runnable() {
             @Override
             public void run() {
             	try {
