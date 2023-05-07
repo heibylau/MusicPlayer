@@ -18,9 +18,13 @@ public class TestPlaylist extends JFrame {
 	private final JPanel contentPanel = new JPanel();
     private boolean isPaused = false;
     private boolean isLooped = false;
+    private boolean isResumed = false;
+    private boolean previousCalled = false;
+    private boolean nextCalled = false;
     private long clipPosition = 0;
     private String fileName = null;
     Thread playThread;
+    boolean exit = false;
     
 	//files
 	private final String CLAUDIO_THE_WORM = "music/Test/Claudio The Worm.wav";
@@ -120,7 +124,7 @@ public class TestPlaylist extends JFrame {
 	}
 
 	protected void btnPlay_mouseClicked(MouseEvent arg0) {
-		playMusic();
+		playMusic(true);
 		btnPlay.setVisible(false);
 		btnResume.setVisible(true);
 		 
@@ -185,52 +189,53 @@ public class TestPlaylist extends JFrame {
 
 	}
 	
-    public void playMusic() {
-        isPaused = false;
+    public void playMusic(boolean b) {
 
         playThread = new Thread(new Runnable() {
             @Override
             public void run() {
-            	try {
-                    while (!isPaused && playlist.hasNext()) {
-                    	if (fileName == null) {
-                    		fileName = playlist.getHead();
-                        	System.out.println(fileName);
-                            currentClip = toWAV(fileName);
-                            if (clipPosition != 0) {
-                            	currentClip.setMicrosecondPosition(clipPosition);
-                            }
-                            currentClip.start();
-                    	} else {
-                    		System.out.println(fileName);
-                    		currentClip = toWAV(fileName);
-                    		if (clipPosition != 0) {
-                            	currentClip.setMicrosecondPosition(clipPosition);
-                            }
-                            currentClip.start();
-                    	}
-                    	
-                        while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
-                            try {
-                                Thread.sleep(100);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
+            	if (b == true) {
+            		exit = false;
+                    while (!exit && playlist.hasNext()) {
+                    	try {
+                        	if (fileName == null) {
+                        		fileName = playlist.getHead();
+                            	System.out.println(fileName);
+                                currentClip = toWAV(fileName);
+                                if (clipPosition != 0) {
+                                	currentClip.setMicrosecondPosition(clipPosition);
                                 }
-                        }
-                        if (currentClip.getMicrosecondLength() == currentClip.getMicrosecondPosition()) {
-                    		fileName = (String) playlist.next();
-                        }
+                                currentClip.start();
+                        	} else {
+                        		System.out.println(fileName);
+                        		currentClip = toWAV(fileName);
+                        		if (clipPosition != 0) {
+                                	currentClip.setMicrosecondPosition(clipPosition);
+                                }
+                                currentClip.start();
+                        	}
+                            while (!exit && currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
+                                try {
+                                    Thread.sleep(100);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                            }
+                            
+                            if (currentClip.getMicrosecondLength() == currentClip.getMicrosecondPosition()) {
+                        		fileName = (String) playlist.next();
+                            }
 
-                    }
-            	} catch (Exception e) {
-            		System.out.println("no music playing");
+                        } catch (Exception e) {
+                    		System.out.println("no music playing");
+                    	}
+                	} 
             	}
             }
         });
         playThread.start();
 
     }
-	
 
     public void pause() {
         isPaused = true;
@@ -241,18 +246,17 @@ public class TestPlaylist extends JFrame {
     }
 
 	public void resume() {
-	    if (currentClip != null) {
-	        playMusic();
-	    }
-
+		exit = true;
+		playMusic(true);
 	}
 	
 	public void previous(){
         pause();
+        exit = true;
         if (playlist.hasPrevious()) {
             clipPosition = 0;
             fileName = (String) playlist.previous();
-            playMusic();
+            playMusic(true);
         }
 
 
@@ -260,10 +264,11 @@ public class TestPlaylist extends JFrame {
 
     public void next(){
     	pause();
+    	exit = true;
         if (playlist.hasNext()) {
             clipPosition = 0;
             fileName = (String) playlist.next();
-            playMusic();
+            playMusic(true);
         }
     }
 
