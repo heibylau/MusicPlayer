@@ -130,18 +130,18 @@ public class FourSeasons extends JFrame{
 		
 		
 		//add files
-		playlist.add(Spring1.getDescription());
-		playlist.add(Spring2.getDescription());
-		playlist.add(Spring3.getDescription());
-		playlist.add(Summer1.getDescription());
-		playlist.add(Summer2.getDescription());
-		playlist.add(Summer3.getDescription());
-		playlist.add(Autumn1.getDescription());
-		playlist.add(Autumn2.getDescription());
-		playlist.add(Autumn3.getDescription());
-		playlist.add(Winter1.getDescription());
-		playlist.add(Winter2.getDescription());
-		playlist.add(Winter3.getDescription());
+		playlist.add(Spring1.getFileName());
+		playlist.add(Spring2.getFileName());
+		playlist.add(Spring3.getFileName());
+		playlist.add(Summer1.getFileName());
+		playlist.add(Summer2.getFileName());
+		playlist.add(Summer3.getFileName());
+		playlist.add(Autumn1.getFileName());
+		playlist.add(Autumn2.getFileName());
+		playlist.add(Autumn3.getFileName());
+		playlist.add(Winter1.getFileName());
+		playlist.add(Winter2.getFileName());
+		playlist.add(Winter3.getFileName());
 		
 		//add descriptions
 		descriptionList.add(Spring1.getDescription());
