@@ -102,8 +102,8 @@ public class NCS extends JFrame{
 		
 		
 		//add files
-		playlist.addMusic(HOPE);
-		playlist.addMusic(INFECTIOUS);
+//		playlist.addMusic(HOPE);
+//		playlist.addMusic(INFECTIOUS);
 		
 		currentClip = null;
 

@@ -24,25 +24,29 @@ import javax.swing.border.EmptyBorder;
 public class FourSeasons extends JFrame{
 
 	private final JPanel contentPanel = new JPanel();
-    private boolean isPaused = false;
+	private boolean isPaused = false;
     private boolean isLooped = false;
+    private boolean isResumed = false;
+    private boolean previousCalled = false;
+    private boolean nextCalled = false;
     private long clipPosition = 0;
-    private String fileName = null;
+    private String fileName = "";
+    private String musicName = "";
     Thread playThread;
     
 	//files
-	private final String SPRING1 = "music/FourSeasons/Spring_1st_movement.wav";
-	private final String SPRING2 = "music/FourSeasons/Spring_2nd_movement.wav";
-	private final String SPRING3 = "music/FourSeasons/Spring_3rd_movement.wav";
-	private final String SUMMER1 = "music/FourSeasons/Summer_1st_movement.wav";
-	private final String SUMMER2 = "music/FourSeasons/Summer_2nd_movement.wav";
-	private final String SUMMER3 = "music/FourSeasons/Summer_3rd_movement.wav";
-	private final String AUTUMN1 = "music/FourSeasons/Autumn_1st_movement.wav";
-	private final String AUTUMN2 = "music/FourSeasons/Autumn_2nd_movement.wav";
-	private final String AUTUMN3 = "music/FourSeasons/Autumn_3rd_movement.wav";
-	private final String WINTER1 = "music/FourSeasons/Winter_1st_movement.wav";
-	private final String WINTER2 = "music/FourSeasons/Winter_2nd_movement.wav";
-	private final String WINTER3 = "music/FourSeasons/Winter_3rd_movement.wav";
+	MusicTrack Spring1 = new MusicTrack("music/FourSeasons/Spring_1st_movement.wav", "Spring-1st Movement");
+	MusicTrack Spring2 = new MusicTrack("music/FourSeasons/Spring_2nd_movement.wav", "Spring-2nd Movement");
+	MusicTrack Spring3 = new MusicTrack("music/FourSeasons/Spring_3rd_movement.wav", "Spring-3rd Movement");
+	MusicTrack Summer1 = new MusicTrack("music/FourSeasons/Summer_1st_movement.wav", "Summer-1st Movement");
+	MusicTrack Summer2 = new MusicTrack("music/FourSeasons/Summer_2nd_movement.wav", "Summer-2nd Movement");
+	MusicTrack Summer3 = new MusicTrack("music/FourSeasons/Summer_3rd_movement.wav", "Summer-3rd Movement");
+	MusicTrack Autumn1 = new MusicTrack("music/FourSeasons/Autumn_1st_movement.wav", "Autumn-1st Movement");
+	MusicTrack Autumn2 = new MusicTrack("music/FourSeasons/Autumn_2nd_movement.wav", "Autumn-2nd Movement");
+	MusicTrack Autumn3 = new MusicTrack("music/FourSeasons/Autumn_3rd_movement.wav", "Autumn-3rd Movement");
+	MusicTrack Winter1 = new MusicTrack("music/FourSeasons/Winter_1st_movement.wav", "Winter-1st Movement");
+	MusicTrack Winter2 = new MusicTrack("music/FourSeasons/Winter_2nd_movement.wav", "Winter-2nd Movement");
+	MusicTrack Winter3 = new MusicTrack("music/FourSeasons/Winter_3rd_movement.wav", "Winter-3rd Movement");
 
 	//button
 	private JButton btnPlay;
@@ -57,6 +61,7 @@ public class FourSeasons extends JFrame{
 	
 	//LinkedList
 	CircularLinkedList playlist = new CircularLinkedList();
+	CircularLinkedList descriptionList = new CircularLinkedList();
 
 	public FourSeasons() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -125,19 +130,34 @@ public class FourSeasons extends JFrame{
 		
 		
 		//add files
-		playlist.addMusic(SPRING1);
-		playlist.addMusic(SPRING2);
-		playlist.addMusic(SPRING3);
-		playlist.addMusic(SUMMER1);
-		playlist.addMusic(SUMMER2);
-		playlist.addMusic(SUMMER3);
-		playlist.addMusic(AUTUMN1);
-		playlist.addMusic(AUTUMN2);
-		playlist.addMusic(AUTUMN3);
-		playlist.addMusic(WINTER1);
-		playlist.addMusic(WINTER2);
-		playlist.addMusic(WINTER3);
+		playlist.add(Spring1.getDescription());
+		playlist.add(Spring2.getDescription());
+		playlist.add(Spring3.getDescription());
+		playlist.add(Summer1.getDescription());
+		playlist.add(Summer2.getDescription());
+		playlist.add(Summer3.getDescription());
+		playlist.add(Autumn1.getDescription());
+		playlist.add(Autumn2.getDescription());
+		playlist.add(Autumn3.getDescription());
+		playlist.add(Winter1.getDescription());
+		playlist.add(Winter2.getDescription());
+		playlist.add(Winter3.getDescription());
 		
+		//add descriptions
+		descriptionList.add(Spring1.getDescription());
+		descriptionList.add(Spring2.getDescription());
+		descriptionList.add(Spring3.getDescription());
+		descriptionList.add(Summer1.getDescription());
+		descriptionList.add(Summer2.getDescription());
+		descriptionList.add(Summer3.getDescription());
+		descriptionList.add(Autumn1.getDescription());
+		descriptionList.add(Autumn2.getDescription());
+		descriptionList.add(Autumn3.getDescription());
+		descriptionList.add(Winter1.getDescription());
+		descriptionList.add(Winter2.getDescription());
+		descriptionList.add(Winter3.getDescription());
+
+		//clip
 		currentClip = null;
 
 
@@ -179,10 +199,12 @@ public class FourSeasons extends JFrame{
             public void run() {
             	if (!isLooped) {
                     playlist.loop(); 
+                    descriptionList.loop();
             		isLooped = true;
             		System.out.println("looping");
             	} else {
             		playlist.unLoop();
+            		descriptionList.unLoop();
             		isLooped = false;
             		System.out.println("unlooped");
             	}
@@ -209,7 +231,7 @@ public class FourSeasons extends JFrame{
 
 	}
 	
-    public void playMusic() {
+	public void playMusic() {
         isPaused = false;
 
         playThread = new Thread(new Runnable() {
@@ -217,24 +239,59 @@ public class FourSeasons extends JFrame{
             public void run() {
             	try {
                     while (!isPaused && playlist.hasNext()) {
-                    	if (fileName == null) {
+                    	if (fileName == "") {
                     		fileName = playlist.getHead();
-                        	System.out.println(fileName);
+                    		musicName = descriptionList.getHead();
+                        	System.out.println(musicName);
                             currentClip = toWAV(fileName);
-                            if (clipPosition != 0) {
-                            	currentClip.setMicrosecondPosition(clipPosition);
-                            }
                             currentClip.start();
                     	} else {
-                    		System.out.println(fileName);
+                    		System.out.println(musicName);
                     		currentClip = toWAV(fileName);
-                    		if (clipPosition != 0) {
-                            	currentClip.setMicrosecondPosition(clipPosition);
-                            }
                             currentClip.start();
                     	}
                     	
                         while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
+                        	if(isPaused) {
+                                if (currentClip != null && currentClip.isRunning()) {
+                                    currentClip.stop();
+                                }
+                                clipPosition = currentClip.getMicrosecondPosition();
+                                isPaused = false;
+                        	}
+                        	if (isResumed) {
+                        		currentClip.setMicrosecondPosition(clipPosition);
+                        		currentClip.start();
+                        		isResumed = false;
+                        	}
+                        	if (nextCalled) {
+                        		if (currentClip != null && currentClip.isRunning()) {
+                                    currentClip.stop();
+                                }
+                                if (playlist.hasNext()) {
+                                    clipPosition = 0;
+                                    fileName = (String) playlist.next();
+                                    musicName = (String) descriptionList.next();
+                                    System.out.println(musicName);
+                                    currentClip = toWAV(fileName);
+                                    currentClip.start();
+                                    nextCalled = false;
+                                }
+                        	}
+                        	if (previousCalled) {
+                        		if (currentClip != null && currentClip.isRunning()) {
+                                    currentClip.stop();
+                                }
+                        		if (playlist.hasPrevious()) {
+                                    clipPosition = 0;
+                                    fileName = (String) playlist.previous();
+                                    musicName = (String) descriptionList.previous();
+                                    System.out.println(musicName);
+                                    currentClip = toWAV(fileName);
+                                    currentClip.start();
+                                    previousCalled = false;
+                                }
+                        	}
                             try {
                                 Thread.sleep(100);
                                 } catch (InterruptedException e) {
@@ -243,6 +300,7 @@ public class FourSeasons extends JFrame{
                         }
                         if (currentClip.getMicrosecondLength() == currentClip.getMicrosecondPosition()) {
                     		fileName = (String) playlist.next();
+                    		musicName = (String) descriptionList.next();
                         }
 
                     }
@@ -258,37 +316,18 @@ public class FourSeasons extends JFrame{
 
     public void pause() {
         isPaused = true;
-        if (currentClip != null && currentClip.isRunning()) {
-            currentClip.stop();
-        }
-        clipPosition = currentClip.getMicrosecondPosition();
     }
 
 	public void resume() {
-	    if (currentClip != null) {
-	        playMusic();
-	    }
-
+		isResumed = true; 
 	}
 	
 	public void previous(){
-        pause();
-        if (playlist.hasPrevious()) {
-            clipPosition = 0;
-            fileName = (String) playlist.previous();
-            playMusic();
-        }
-
-
+		previousCalled = true;
     }
 
     public void next(){
-    	pause();
-        if (playlist.hasNext()) {
-            clipPosition = 0;
-            fileName = (String) playlist.next();
-            playMusic();
-        }
+    	nextCalled = true;
     }
 
 	

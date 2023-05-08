@@ -6,8 +6,8 @@ public class CircularLinkedList {
 	Node lastNode;
 	Node tail;
 	
-	public void addMusic(String filePath) {
-		Node newNode = new Node(filePath, null , null);
+	public void add(String name) {
+		Node newNode = new Node(name, null , null);
 		Node current = head;
 		
 		if (head == null) {
