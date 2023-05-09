@@ -19,6 +19,7 @@ import javax.sound.sampled.LineListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -57,6 +58,11 @@ public class FourSeasons extends JFrame{
 	private JButton btnNext;
 	private JButton btnLoop;
 	
+	
+	//label
+	private JLabel lblTitle;
+	private JLabel lblImage;
+	
 	//clip
 	private Clip currentClip;
 	
@@ -70,6 +76,7 @@ public class FourSeasons extends JFrame{
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(Color.WHITE);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
@@ -82,7 +89,8 @@ public class FourSeasons extends JFrame{
 			}
 		});
 		btnPlay.setBounds(175, 460, 50, 50);
-		btnPlay.setBackground(new Color(0,0,0,0));
+		btnPlay.setBackground(Color.WHITE);
+		btnPlay.setBorderPainted(false);
 		contentPanel.add(btnPlay);
 		
 		ImageIcon pause = new ImageIcon("graphics/PauseButton.png");
@@ -93,6 +101,8 @@ public class FourSeasons extends JFrame{
 			}
 		});
 		btnPause.setBounds(190, 460, 20, 50);
+		btnPause.setBackground(Color.WHITE);
+		btnPause.setBorderPainted(false);
 		btnPause.setVisible(false);
 		contentPanel.add(btnPause);
 		
@@ -104,6 +114,8 @@ public class FourSeasons extends JFrame{
 			}
 		});
 		btnResume.setBounds(175, 460, 50, 50);
+		btnResume.setBackground(Color.WHITE);
+		btnResume.setBorderPainted(false);
 		btnResume.setVisible(false);
 		contentPanel.add(btnResume);
 		
@@ -115,6 +127,8 @@ public class FourSeasons extends JFrame{
 			}
 		});
 		btnPrevious.setBounds(50, 460, 50, 50);
+		btnPrevious.setBackground(Color.WHITE);
+		btnPrevious.setBorderPainted(false);
 		contentPanel.add(btnPrevious);
 		
 		ImageIcon next = new ImageIcon("graphics/NextButton.png");
@@ -125,6 +139,8 @@ public class FourSeasons extends JFrame{
 			}
 		});
 		btnNext.setBounds(300, 460, 50, 50);
+		btnNext.setBackground(Color.WHITE);
+		btnNext.setBorderPainted(false);
 		contentPanel.add(btnNext);
 		
 		btnLoop = new JButton("Loop");
@@ -133,8 +149,18 @@ public class FourSeasons extends JFrame{
 				btnLoop_mouseClicked(e);
 			}
 		});
-		btnLoop.setBounds(106, 320, 89, 23);
+		btnLoop.setBounds(250, 400, 89, 23);
 		contentPanel.add(btnLoop);
+		
+		//label
+		lblTitle = new JLabel("");
+		lblTitle.setBounds(50, 380, 300, 50);
+		contentPanel.add(lblTitle);
+		
+		ImageIcon image = new ImageIcon();
+		lblImage = new JLabel(image);
+		lblImage.setBounds(50, 50, 300, 300);
+		contentPanel.add(lblImage);
 		
 		
 		//add files
@@ -251,15 +277,20 @@ public class FourSeasons extends JFrame{
                     		fileName = playlist.getHead();
                     		musicName = descriptionList.getHead();
                         	System.out.println(musicName);
+                        	lblTitle.setText(musicName);
                             currentClip = toWAV(fileName);
                             currentClip.start();
+                            getImage();
                     	} else {
                     		System.out.println(musicName);
+                    		lblTitle.setText(musicName);
                     		currentClip = toWAV(fileName);
                             currentClip.start();
+                            getImage();
                     	}
                     	
                         while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
+                        	getImage();
                         	if(isPaused) {
                                 if (currentClip != null && currentClip.isRunning()) {
                                     currentClip.stop();
@@ -281,6 +312,7 @@ public class FourSeasons extends JFrame{
                                     fileName = (String) playlist.next();
                                     musicName = (String) descriptionList.next();
                                     System.out.println(musicName);
+                                    lblTitle.setText(musicName);
                                     currentClip = toWAV(fileName);
                                     currentClip.start();
                                     nextCalled = false;
@@ -295,6 +327,7 @@ public class FourSeasons extends JFrame{
                                     fileName = (String) playlist.previous();
                                     musicName = (String) descriptionList.previous();
                                     System.out.println(musicName);
+                                    lblTitle.setText(musicName);
                                     currentClip = toWAV(fileName);
                                     currentClip.start();
                                     previousCalled = false;
@@ -321,6 +354,24 @@ public class FourSeasons extends JFrame{
 
     }
 	
+	public void getImage() {
+		ImageIcon spring = new ImageIcon("graphics/Spring.png");
+		ImageIcon summer = new ImageIcon("graphics/Summer.png");
+		ImageIcon autumn = new ImageIcon("graphics/Autumn.png");
+		ImageIcon winter = new ImageIcon("graphics/Winter.png");
+		if (musicName == "Spring-1st Movement" || musicName == "Spring-2nd Movement" || musicName == "Spring-3rd Movement") {
+			lblImage.setIcon(spring);
+		}
+		if (musicName == "Summer-1st Movement" || musicName == "Summer-2nd Movement" || musicName == "Summer-3rd Movement") {
+			lblImage.setIcon(summer);
+		}
+		if (musicName == "Autumn-1st Movement" || musicName == "Autumn-2nd Movement" || musicName == "Autumn-3rd Movement") {
+			lblImage.setIcon(autumn);
+		}
+		if (musicName == "Winter-1st Movement" || musicName == "Winter-2nd Movement" || musicName == "Winter-3rd Movement") {
+			lblImage.setIcon(winter);
+		}
+	}
 
     public void pause() {
         isPaused = true;

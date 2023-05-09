@@ -14,6 +14,7 @@ public class PlayerFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnFourSeasons;
+	private JButton btnNCS;
 	private JLabel defaultBackground;
 	private JLabel lblFourSeasons;
 	
@@ -64,6 +65,15 @@ public class PlayerFrame extends JFrame {
 		lblFourSeasons.setBounds(85, 300, 200, 20);
 		contentPane.add(lblFourSeasons);
 
+		//NCS playlist button
+		btnNCS = new JButton("NCS");
+		btnNCS.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				btnNCS_mouseClicked(e);
+			}
+		});
+		btnNCS.setBounds(200, 300, 89, 23);
+		contentPane.add(btnNCS);
 		
 		//Test playlist button
 		btnTest = new JButton("Test");
@@ -99,6 +109,13 @@ public class PlayerFrame extends JFrame {
 		TestPlaylist test = new TestPlaylist();
 		test.setLocationRelativeTo(this);
 		test.setVisible(true);
+		this.repaint();
+	}
+	
+	protected void btnNCS_mouseClicked(MouseEvent arg0) {
+		NCS ncs = new NCS();
+		ncs.setLocationRelativeTo(this);
+		ncs.setVisible(true);
 		this.repaint();
 	}
 

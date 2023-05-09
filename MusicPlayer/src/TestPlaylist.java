@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
@@ -63,6 +64,7 @@ public class TestPlaylist extends JFrame {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(Color.WHITE);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
@@ -75,6 +77,8 @@ public class TestPlaylist extends JFrame {
 			}
 		});
 		btnPlay.setBounds(175, 460, 50, 50);
+		btnPlay.setBackground(Color.WHITE);
+		btnPlay.setBorderPainted(false);
 		contentPanel.add(btnPlay);
 		
 		ImageIcon pause = new ImageIcon("graphics/PauseButton.png");
@@ -85,6 +89,8 @@ public class TestPlaylist extends JFrame {
 			}
 		});
 		btnPause.setBounds(190, 460, 20, 50);
+		btnPause.setBackground(Color.WHITE);
+		btnPause.setBorderPainted(false);
 		btnPause.setVisible(false);
 		contentPanel.add(btnPause);
 		
@@ -96,6 +102,8 @@ public class TestPlaylist extends JFrame {
 			}
 		});
 		btnResume.setBounds(175, 460, 50, 50);
+		btnResume.setBackground(Color.WHITE);
+		btnResume.setBorderPainted(false);
 		btnResume.setVisible(false);
 		contentPanel.add(btnResume);
 		
@@ -107,6 +115,8 @@ public class TestPlaylist extends JFrame {
 			}
 		});
 		btnPrevious.setBounds(50, 460, 50, 50);
+		btnPrevious.setBackground(Color.WHITE);
+		btnPrevious.setBorderPainted(false);
 		contentPanel.add(btnPrevious);
 		
 		ImageIcon next = new ImageIcon("graphics/NextButton.png");
@@ -117,6 +127,8 @@ public class TestPlaylist extends JFrame {
 			}
 		});
 		btnNext.setBounds(300, 460, 50, 50);
+		btnNext.setBackground(Color.WHITE);
+		btnNext.setBorderPainted(false);
 		contentPanel.add(btnNext);
 		
 		btnLoop = new JButton("Loop");

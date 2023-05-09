@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -7,88 +8,120 @@ import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class NCS extends JFrame{
 	private final JPanel contentPanel = new JPanel();
-    private boolean isPaused = false;
+	private boolean isPaused = false;
     private boolean isLooped = false;
+    private boolean isResumed = false;
+    private boolean previousCalled = false;
+    private boolean nextCalled = false;
+    private long clipPosition = 0;
+    private String fileName = "";
+    private String musicName = "";
+    Thread playThread;
     
-    //files
-    private final String HOPE = "music/Hope.wav";
-    private final String INFECTIOUS = "music/Infectious.wav";
-    
-    //button
-  	private JButton btnPlay;
-  	private JButton btnPause;
-  	private JButton btnResume;
-  	private JButton btnPrevious;
-  	private JButton btnNext;
-  	private JButton btnLoop;
-  	
+	//files
+	MusicTrack Hope = new MusicTrack("music/NCS/Hope.wav", "Hope - Tobu");
+	MusicTrack Infectious = new MusicTrack("music/NCS/Infectious.wav", "Infectious - Tobu");
+
+	//button
+	private JButton btnPlay;
+	private JButton btnPause;
+	private JButton btnResume;
+	private JButton btnPrevious;
+	private JButton btnNext;
+	private JButton btnLoop;
+	
+	
+	//label
+	private JLabel lblTitle;
+	private JLabel lblImage;
+	
 	//clip
 	private Clip currentClip;
 	
 	//LinkedList
 	CircularLinkedList playlist = new CircularLinkedList();
-	
+	CircularLinkedList descriptionList = new CircularLinkedList();
+
 	public NCS() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 400, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(Color.WHITE);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		//JButton
-		btnPlay = new JButton("Play");
+		ImageIcon play = new ImageIcon("graphics/PlayResumeButton.png");
+		btnPlay = new JButton(play);
 		btnPlay.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnPlay_mouseClicked(e);
 			}
 		});
-		btnPlay.setBounds(106, 135, 89, 23);
+		btnPlay.setBounds(175, 460, 50, 50);
+		btnPlay.setBackground(Color.WHITE);
+		btnPlay.setBorderPainted(false);
 		contentPanel.add(btnPlay);
 		
-		btnPause = new JButton("Pause");
+		ImageIcon pause = new ImageIcon("graphics/PauseButton.png");
+		btnPause = new JButton(pause);
 		btnPause.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnPause_mouseClicked(e);
 			}
 		});
-		btnPause.setBounds(106, 170, 89, 23);
+		btnPause.setBounds(190, 460, 20, 50);
+		btnPause.setBackground(Color.WHITE);
+		btnPause.setBorderPainted(false);
+		btnPause.setVisible(false);
 		contentPanel.add(btnPause);
 		
-		btnResume = new JButton("Resume");
+		ImageIcon resume = new ImageIcon("graphics/PlayResumeButton.png");
+		btnResume = new JButton(resume);
 		btnResume.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnResume_mouseClicked(e);
 			}
 		});
-		btnResume.setBounds(106, 170, 89, 23);
+		btnResume.setBounds(175, 460, 50, 50);
+		btnResume.setBackground(Color.WHITE);
+		btnResume.setBorderPainted(false);
 		btnResume.setVisible(false);
 		contentPanel.add(btnResume);
 		
-		btnPrevious = new JButton("Previous");
+		ImageIcon previous = new ImageIcon("graphics/PreviousButton.png");
+		btnPrevious = new JButton(previous);
 		btnPrevious.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnPrevious_mouseClicked(e);
 			}
 		});
-		btnPrevious.setBounds(106, 230, 89, 23);
+		btnPrevious.setBounds(50, 460, 50, 50);
+		btnPrevious.setBackground(Color.WHITE);
+		btnPrevious.setBorderPainted(false);
 		contentPanel.add(btnPrevious);
 		
-		btnNext = new JButton("Next");
+		ImageIcon next = new ImageIcon("graphics/NextButton.png");
+		btnNext = new JButton(next);
 		btnNext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnNext_mouseClicked(e);
 			}
 		});
-		btnNext.setBounds(106, 270, 89, 23);
+		btnNext.setBounds(300, 460, 50, 50);
+		btnNext.setBackground(Color.WHITE);
+		btnNext.setBorderPainted(false);
 		contentPanel.add(btnNext);
 		
 		btnLoop = new JButton("Loop");
@@ -97,23 +130,40 @@ public class NCS extends JFrame{
 				btnLoop_mouseClicked(e);
 			}
 		});
-		btnLoop.setBounds(106, 320, 89, 23);
+		btnLoop.setBounds(250, 400, 89, 23);
 		contentPanel.add(btnLoop);
+		
+		//label
+		lblTitle = new JLabel("");
+		lblTitle.setBounds(50, 380, 300, 50);
+		contentPanel.add(lblTitle);
+		
+		ImageIcon image = new ImageIcon();
+		lblImage = new JLabel(image);
+		lblImage.setBounds(50, 50, 300, 300);
+		contentPanel.add(lblImage);
 		
 		
 		//add files
-//		playlist.addMusic(HOPE);
-//		playlist.addMusic(INFECTIOUS);
+		playlist.add(Hope.getFileName());
+		playlist.add(Infectious.getFileName());
+
 		
+		//add descriptions
+		descriptionList.add(Hope.getDescription());
+		descriptionList.add(Infectious.getDescription());
+
+
+		//clip
 		currentClip = null;
 
 
 	}
-	
+
 	protected void btnPlay_mouseClicked(MouseEvent arg0) {
 		playMusic();
 		btnPlay.setVisible(false);
-		btnResume.setVisible(true);
+		btnPause.setVisible(true);
 		 
 	}
 	
@@ -146,10 +196,12 @@ public class NCS extends JFrame{
             public void run() {
             	if (!isLooped) {
                     playlist.loop(); 
+                    descriptionList.loop();
             		isLooped = true;
             		System.out.println("looping");
             	} else {
             		playlist.unLoop();
+            		descriptionList.unLoop();
             		isLooped = false;
             		System.out.println("unlooped");
             	}
@@ -176,25 +228,85 @@ public class NCS extends JFrame{
 
 	}
 	
-    public void playMusic() {
+	public void playMusic() {
         isPaused = false;
 
-        Thread playThread = new Thread(new Runnable() {
+        playThread = new Thread(new Runnable() {
             @Override
             public void run() {
             	try {
                     while (!isPaused && playlist.hasNext()) {
-                    	String fileName = (String) playlist.next();
-                    	System.out.println(fileName);
-                        currentClip = toWAV(fileName);
-                        currentClip.start();
+                    	if (fileName == "") {
+                    		fileName = playlist.getHead();
+                    		musicName = descriptionList.getHead();
+                        	System.out.println(musicName);
+                        	lblTitle.setText(musicName);
+                            currentClip = toWAV(fileName);
+                            currentClip.start();
+                            getImage();
+                    	} else {
+                    		System.out.println(musicName);
+                    		lblTitle.setText(musicName);
+                    		currentClip = toWAV(fileName);
+                            currentClip.start();
+                            getImage();
+                    	}
+                    	
                         while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
+                        	getImage();
+                        	if(isPaused) {
+                                if (currentClip != null && currentClip.isRunning()) {
+                                    currentClip.stop();
+                                }
+                                clipPosition = currentClip.getMicrosecondPosition();
+                                isPaused = false;
+                        	}
+                        	if (isResumed) {
+                        		currentClip.setMicrosecondPosition(clipPosition);
+                        		currentClip.start();
+                        		isResumed = false;
+                        	}
+                        	if (nextCalled) {
+                        		if (currentClip != null && currentClip.isRunning()) {
+                                    currentClip.stop();
+                                }
+                                if (playlist.hasNext()) {
+                                    clipPosition = 0;
+                                    fileName = (String) playlist.next();
+                                    musicName = (String) descriptionList.next();
+                                    System.out.println(musicName);
+                                    lblTitle.setText(musicName);
+                                    currentClip = toWAV(fileName);
+                                    currentClip.start();
+                                    nextCalled = false;
+                                }
+                        	}
+                        	if (previousCalled) {
+                        		if (currentClip != null && currentClip.isRunning()) {
+                                    currentClip.stop();
+                                }
+                        		if (playlist.hasPrevious()) {
+                                    clipPosition = 0;
+                                    fileName = (String) playlist.previous();
+                                    musicName = (String) descriptionList.previous();
+                                    System.out.println(musicName);
+                                    lblTitle.setText(musicName);
+                                    currentClip = toWAV(fileName);
+                                    currentClip.start();
+                                    previousCalled = false;
+                                }
+                        	}
                             try {
                                 Thread.sleep(100);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
                         }
+                        if (currentClip.getMicrosecondLength() == currentClip.getMicrosecondPosition()) {
+                    		fileName = (String) playlist.next();
+                    		musicName = (String) descriptionList.next();
+                        }
+
                     }
             	} catch (Exception e) {
             		System.out.println("no music playing");
@@ -202,37 +314,33 @@ public class NCS extends JFrame{
             }
         });
         playThread.start();
+
     }
 	
+	public void getImage() {
+		ImageIcon hope = new ImageIcon("graphics/Hope.jpg");
+		ImageIcon infectious = new ImageIcon("graphics/Infectious.jpg");
+		if (musicName == "Hope - Tobu") {
+			lblImage.setIcon(hope);
+		}
+		if (musicName == "Infectious - Tobu") {
+			lblImage.setIcon(infectious);
+		}
+	}
 
     public void pause() {
         isPaused = true;
-        if (currentClip != null && currentClip.isRunning()) {
-            currentClip.stop();
-        }
     }
 
 	public void resume() {
-	    if (currentClip != null) {
-	        currentClip.start();
-	    }
-
+		isResumed = true; 
 	}
 	
-	public void previous() {
-        pause();
-		if (playlist.hasPrevious()) {
-            currentClip = toWAV((String) playlist.previous());
-		}
-        resume();
-
+	public void previous(){
+		previousCalled = true;
     }
 
-    public void next() {
-        pause();
-		if (playlist.hasNext()) {
-            currentClip = toWAV((String) playlist.next());
-		}
-		resume();
+    public void next(){
+    	nextCalled = true;
     }
 }
