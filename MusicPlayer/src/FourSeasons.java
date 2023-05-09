@@ -1,5 +1,5 @@
 import java.awt.BorderLayout;
-
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -16,6 +16,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -73,50 +74,57 @@ public class FourSeasons extends JFrame{
 		contentPanel.setLayout(null);
 		
 		//JButton
-		btnPlay = new JButton("Play");
+		ImageIcon play = new ImageIcon("graphics/PlayResumeButton.png");
+		btnPlay = new JButton(play);
 		btnPlay.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnPlay_mouseClicked(e);
 			}
 		});
-		btnPlay.setBounds(106, 135, 89, 23);
+		btnPlay.setBounds(175, 460, 50, 50);
+		btnPlay.setBackground(new Color(0,0,0,0));
 		contentPanel.add(btnPlay);
 		
-		btnPause = new JButton("Pause");
+		ImageIcon pause = new ImageIcon("graphics/PauseButton.png");
+		btnPause = new JButton(pause);
 		btnPause.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnPause_mouseClicked(e);
 			}
 		});
-		btnPause.setBounds(106, 170, 89, 23);
+		btnPause.setBounds(190, 460, 20, 50);
+		btnPause.setVisible(false);
 		contentPanel.add(btnPause);
 		
-		btnResume = new JButton("Resume");
+		ImageIcon resume = new ImageIcon("graphics/PlayResumeButton.png");
+		btnResume = new JButton(resume);
 		btnResume.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnResume_mouseClicked(e);
 			}
 		});
-		btnResume.setBounds(106, 170, 89, 23);
+		btnResume.setBounds(175, 460, 50, 50);
 		btnResume.setVisible(false);
 		contentPanel.add(btnResume);
 		
-		btnPrevious = new JButton("Previous");
+		ImageIcon previous = new ImageIcon("graphics/PreviousButton.png");
+		btnPrevious = new JButton(previous);
 		btnPrevious.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnPrevious_mouseClicked(e);
 			}
 		});
-		btnPrevious.setBounds(106, 230, 89, 23);
+		btnPrevious.setBounds(50, 460, 50, 50);
 		contentPanel.add(btnPrevious);
 		
-		btnNext = new JButton("Next");
+		ImageIcon next = new ImageIcon("graphics/NextButton.png");
+		btnNext = new JButton(next);
 		btnNext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnNext_mouseClicked(e);
 			}
 		});
-		btnNext.setBounds(106, 270, 89, 23);
+		btnNext.setBounds(300, 460, 50, 50);
 		contentPanel.add(btnNext);
 		
 		btnLoop = new JButton("Loop");
@@ -166,7 +174,7 @@ public class FourSeasons extends JFrame{
 	protected void btnPlay_mouseClicked(MouseEvent arg0) {
 		playMusic();
 		btnPlay.setVisible(false);
-		btnResume.setVisible(true);
+		btnPause.setVisible(true);
 		 
 	}
 	
