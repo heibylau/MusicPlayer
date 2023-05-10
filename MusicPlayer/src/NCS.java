@@ -31,6 +31,7 @@ public class NCS extends JFrame{
 	MusicTrack Hope = new MusicTrack("music/NCS/Hope.wav", "Hope - Tobu");
 	MusicTrack Infectious = new MusicTrack("music/NCS/Infectious.wav", "Infectious - Tobu");
 	MusicTrack Cloud9 = new MusicTrack("music/NCS/Cloud9.wav", "Cloud 9 - Itro & Tobu");
+	MusicTrack Candyland = new MusicTrack("music/NCS/Candyland.wav", "Candyland - Tobu");
 
 	//button
 	private JButton btnPlay;
@@ -148,11 +149,15 @@ public class NCS extends JFrame{
 		//add files
 		playlist.add(Hope.getFileName());
 		playlist.add(Infectious.getFileName());
+		playlist.add(Cloud9.getFileName());
+		playlist.add(Candyland.getFileName());
 
 		
 		//add descriptions
 		descriptionList.add(Hope.getDescription());
 		descriptionList.add(Infectious.getDescription());
+		descriptionList.add(Cloud9.getDescription());
+		descriptionList.add(Candyland.getDescription());
 
 
 		//clip
@@ -260,9 +265,9 @@ public class NCS extends JFrame{
                                     currentClip.stop();
                                 }
                                 clipPosition = currentClip.getMicrosecondPosition();
-                                isPaused = false;
                         	}
                         	if (isResumed) {
+                        		isPaused = false;
                         		currentClip.setMicrosecondPosition(clipPosition);
                         		currentClip.start();
                         		isResumed = false;
@@ -278,7 +283,9 @@ public class NCS extends JFrame{
                                     System.out.println(musicName);
                                     lblTitle.setText(musicName);
                                     currentClip = toWAV(fileName);
-                                    currentClip.start();
+                                    if(!isPaused) {
+                                        currentClip.start();
+                                    }
                                     nextCalled = false;
                                 }
                         	}
@@ -293,7 +300,9 @@ public class NCS extends JFrame{
                                     System.out.println(musicName);
                                     lblTitle.setText(musicName);
                                     currentClip = toWAV(fileName);
-                                    currentClip.start();
+                                    if(!isPaused) {
+                                        currentClip.start();
+                                    }
                                     previousCalled = false;
                                 }
                         	}
@@ -321,11 +330,19 @@ public class NCS extends JFrame{
 	public void getImage() {
 		ImageIcon hope = new ImageIcon("graphics/Hope.jpg");
 		ImageIcon infectious = new ImageIcon("graphics/Infectious.jpg");
+		ImageIcon cloud9 = new ImageIcon("graphics/Cloud9.jpg");
+		ImageIcon candyland = new ImageIcon("graphics/Candyland.jpg");
 		if (musicName == "Hope - Tobu") {
 			lblImage.setIcon(hope);
 		}
 		if (musicName == "Infectious - Tobu") {
 			lblImage.setIcon(infectious);
+		}
+		if (musicName == "Cloud 9 - Itro & Tobu") {
+			lblImage.setIcon(cloud9);
+		}
+		if (musicName == "Candyland - Tobu") {
+			lblImage.setIcon(candyland);
 		}
 	}
 

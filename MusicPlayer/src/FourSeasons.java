@@ -296,9 +296,9 @@ public class FourSeasons extends JFrame{
                                     currentClip.stop();
                                 }
                                 clipPosition = currentClip.getMicrosecondPosition();
-                                isPaused = false;
                         	}
                         	if (isResumed) {
+                        		isPaused = false;
                         		currentClip.setMicrosecondPosition(clipPosition);
                         		currentClip.start();
                         		isResumed = false;
@@ -314,7 +314,9 @@ public class FourSeasons extends JFrame{
                                     System.out.println(musicName);
                                     lblTitle.setText(musicName);
                                     currentClip = toWAV(fileName);
-                                    currentClip.start();
+                                    if(!isPaused) {
+                                        currentClip.start();
+                                    }
                                     nextCalled = false;
                                 }
                         	}
@@ -329,7 +331,9 @@ public class FourSeasons extends JFrame{
                                     System.out.println(musicName);
                                     lblTitle.setText(musicName);
                                     currentClip = toWAV(fileName);
-                                    currentClip.start();
+                                    if(!isPaused) {
+                                        currentClip.start();
+                                    }
                                     previousCalled = false;
                                 }
                         	}
