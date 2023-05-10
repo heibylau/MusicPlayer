@@ -29,6 +29,7 @@ public class FourSeasons extends JFrame{
 	private boolean isPaused = false;
     private boolean isLooped = false;
     private boolean isResumed = false;
+    private boolean isNightMode = false;
     private boolean previousCalled = false;
     private boolean nextCalled = false;
     private long clipPosition = 0;
@@ -57,6 +58,7 @@ public class FourSeasons extends JFrame{
 	private JButton btnPrevious;
 	private JButton btnNext;
 	private JButton btnLoop;
+	private JButton btnNightMode;
 	
 	
 	//label
@@ -70,6 +72,19 @@ public class FourSeasons extends JFrame{
 	CircularLinkedList playlist = new CircularLinkedList();
 	CircularLinkedList descriptionList = new CircularLinkedList();
 
+	ImageIcon play = new ImageIcon("graphics/PlayResumeButton.png");
+	ImageIcon pause = new ImageIcon("graphics/PauseButton.png");
+	ImageIcon resume = new ImageIcon("graphics/PlayResumeButton.png");
+	ImageIcon previous = new ImageIcon("graphics/PreviousButton.png");
+	ImageIcon next = new ImageIcon("graphics/NextButton.png");
+	ImageIcon nightMode = new ImageIcon("graphics/NightModeButton.png");
+	ImageIcon play_white = new ImageIcon("graphics/PlayResumeButton_white.png");
+	ImageIcon resume_white = new ImageIcon("graphics/PlayResumeButton_white.png");
+	ImageIcon pause_white = new ImageIcon("graphics/PauseButton_white.png");
+	ImageIcon previous_white = new ImageIcon("graphics/PreviousButton_white.png");
+	ImageIcon next_white = new ImageIcon("graphics/NextButton_white.png");
+	ImageIcon nightMode_off = new ImageIcon("graphics/NightModeButton_off.png");
+	
 	public FourSeasons() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 400, 600);
@@ -81,7 +96,6 @@ public class FourSeasons extends JFrame{
 		contentPanel.setLayout(null);
 		
 		//JButton
-		ImageIcon play = new ImageIcon("graphics/PlayResumeButton.png");
 		btnPlay = new JButton(play);
 		btnPlay.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -93,7 +107,7 @@ public class FourSeasons extends JFrame{
 		btnPlay.setBorderPainted(false);
 		contentPanel.add(btnPlay);
 		
-		ImageIcon pause = new ImageIcon("graphics/PauseButton.png");
+
 		btnPause = new JButton(pause);
 		btnPause.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -106,7 +120,7 @@ public class FourSeasons extends JFrame{
 		btnPause.setVisible(false);
 		contentPanel.add(btnPause);
 		
-		ImageIcon resume = new ImageIcon("graphics/PlayResumeButton.png");
+
 		btnResume = new JButton(resume);
 		btnResume.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -119,7 +133,7 @@ public class FourSeasons extends JFrame{
 		btnResume.setVisible(false);
 		contentPanel.add(btnResume);
 		
-		ImageIcon previous = new ImageIcon("graphics/PreviousButton.png");
+
 		btnPrevious = new JButton(previous);
 		btnPrevious.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -131,7 +145,7 @@ public class FourSeasons extends JFrame{
 		btnPrevious.setBorderPainted(false);
 		contentPanel.add(btnPrevious);
 		
-		ImageIcon next = new ImageIcon("graphics/NextButton.png");
+
 		btnNext = new JButton(next);
 		btnNext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -151,6 +165,18 @@ public class FourSeasons extends JFrame{
 		});
 		btnLoop.setBounds(250, 400, 89, 23);
 		contentPanel.add(btnLoop);
+		
+
+		btnNightMode = new JButton(nightMode);
+		btnNightMode.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				btnNightMode_mouseClicked(e);
+			}
+		});
+		btnNightMode.setBounds(0, 0, 50, 50);
+		btnNightMode.setBackground(Color.WHITE);
+		btnNightMode.setBorderPainted(false);
+		contentPanel.add(btnNightMode);
 		
 		//label
 		lblTitle = new JLabel("");
@@ -246,6 +272,30 @@ public class FourSeasons extends JFrame{
             }
         });
         loopThread.start();
+	}
+	
+	protected void btnNightMode_mouseClicked(MouseEvent arg0) {
+		
+		if(!isNightMode) {
+			btnPlay.setIcon(play_white);
+			btnResume.setIcon(resume_white);
+			btnResume.setBackground(Color.BLACK);
+			btnPause.setIcon(pause_white);
+			btnPause.setBackground(Color.BLACK);
+			btnPrevious.setIcon(previous_white);
+			btnNext.setIcon(next_white);
+			btnNightMode.setIcon(nightMode_off);
+			contentPanel.setBackground(Color.BLACK);
+			lblTitle.setForeground(Color.WHITE);
+		} else {
+			btnPlay.setIcon(play);
+			btnResume.setIcon(resume);
+			btnPause.setIcon(pause);
+			btnPrevious.setIcon(previous);
+			btnNext.setIcon(next);
+			btnNightMode.setIcon(nightMode);
+			contentPanel.setBackground(Color.WHITE);
+		}
 	}
 
 	
