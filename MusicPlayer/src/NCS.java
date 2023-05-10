@@ -30,6 +30,7 @@ public class NCS extends JFrame{
 	//files
 	MusicTrack Hope = new MusicTrack("music/NCS/Hope.wav", "Hope - Tobu");
 	MusicTrack Infectious = new MusicTrack("music/NCS/Infectious.wav", "Infectious - Tobu");
+	MusicTrack Cloud9 = new MusicTrack("music/NCS/Cloud9.wav", "Cloud 9 - Itro & Tobu");
 
 	//button
 	private JButton btnPlay;
