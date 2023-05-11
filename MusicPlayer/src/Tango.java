@@ -32,8 +32,8 @@ public class Tango extends JFrame{
 	//files
 	MusicTrack Bordel = new MusicTrack("music/Tango/Bordel 1900.wav", "Bordel 1900 - Astor Piazzolla");
 	MusicTrack Cafe = new MusicTrack("music/Tango/Cafe 1930.wav", "Cafe 1930 - Astor Piazzolla");
-	MusicTrack Cloud9 = new MusicTrack("music/Tango/Nighclub 1960.wav", "Nightclub 1960 - Astor Piazzolla");
-	MusicTrack Candyland = new MusicTrack("music/NCS/Candyland.wav", "Candyland - Tobu");
+	MusicTrack Nightclub = new MusicTrack("music/Tango/Nightclub 1960.wav", "Nightclub 1960 - Astor Piazzolla");
+	MusicTrack Concert = new MusicTrack("music/Tango/Concert.wav", "Modern-day Concert - Astor Piazzolla");
 
 	//button
 	private JButton btnPlay;
@@ -177,15 +177,15 @@ public class Tango extends JFrame{
 		//add files
 		playlist.add(Bordel.getFileName());
 		playlist.add(Cafe.getFileName());
-		playlist.add(Cloud9.getFileName());
-		playlist.add(Candyland.getFileName());
+		playlist.add(Nightclub.getFileName());
+		playlist.add(Concert.getFileName());
 
 		
 		//add descriptions
 		descriptionList.add(Bordel.getDescription());
 		descriptionList.add(Cafe.getDescription());
-		descriptionList.add(Cloud9.getDescription());
-		descriptionList.add(Candyland.getDescription());
+		descriptionList.add(Nightclub.getDescription());
+		descriptionList.add(Concert.getDescription());
 
 
 		//clip
