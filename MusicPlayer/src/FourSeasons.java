@@ -72,6 +72,7 @@ public class FourSeasons extends JFrame{
 	CircularLinkedList playlist = new CircularLinkedList();
 	CircularLinkedList descriptionList = new CircularLinkedList();
 
+	//Images
 	ImageIcon play = new ImageIcon("graphics/PlayResumeButton.png");
 	ImageIcon pause = new ImageIcon("graphics/PauseButton.png");
 	ImageIcon resume = new ImageIcon("graphics/PlayResumeButton.png");
@@ -278,23 +279,34 @@ public class FourSeasons extends JFrame{
 		
 		if(!isNightMode) {
 			btnPlay.setIcon(play_white);
+			btnPlay.setBackground(Color.BLACK);
 			btnResume.setIcon(resume_white);
 			btnResume.setBackground(Color.BLACK);
 			btnPause.setIcon(pause_white);
 			btnPause.setBackground(Color.BLACK);
 			btnPrevious.setIcon(previous_white);
+			btnPrevious.setBackground(Color.BLACK);
 			btnNext.setIcon(next_white);
+			btnNext.setBackground(Color.BLACK);
 			btnNightMode.setIcon(nightMode_off);
 			contentPanel.setBackground(Color.BLACK);
 			lblTitle.setForeground(Color.WHITE);
+			isNightMode = true;
 		} else {
 			btnPlay.setIcon(play);
+			btnPlay.setBackground(Color.WHITE);
 			btnResume.setIcon(resume);
+			btnResume.setBackground(Color.WHITE);
 			btnPause.setIcon(pause);
+			btnPause.setBackground(Color.WHITE);
 			btnPrevious.setIcon(previous);
+			btnPrevious.setBackground(Color.WHITE);
 			btnNext.setIcon(next);
+			btnNext.setBackground(Color.WHITE);
 			btnNightMode.setIcon(nightMode);
 			contentPanel.setBackground(Color.WHITE);
+			lblTitle.setForeground(Color.BLACK);
+			isNightMode = false;
 		}
 	}
 
