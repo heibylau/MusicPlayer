@@ -21,6 +21,7 @@ public class PlayerFrame extends JFrame {
 	private JLabel defaultBackground;
 	private JLabel lblFourSeasons;
 	private JLabel lblNCS;
+	private JLabel lblTango;
 	
 	private JButton btnTest;
 
@@ -97,6 +98,11 @@ public class PlayerFrame extends JFrame {
 		btnTango.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(btnTango);
 		
+		//Tango playlist description
+		lblTango = new JLabel("Tango");
+		lblTango.setBounds(110, 430, 100, 20);
+		contentPane.add(lblTango);
+		
 		//Test playlist button
 		btnTest = new JButton("Test");
 		btnTest.addMouseListener(new MouseAdapter() {
@@ -106,10 +112,7 @@ public class PlayerFrame extends JFrame {
 		});
 		btnTest.setBounds(200, 200, 89, 23);
 		contentPane.add(btnTest);
-		
-		//Background button
-		
-		
+
 		//Background
 		ImageIcon def = new ImageIcon("background/Default_background.png");
 		defaultBackground = new JLabel(def);
