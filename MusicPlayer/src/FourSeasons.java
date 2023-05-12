@@ -430,10 +430,10 @@ public class FourSeasons extends JFrame{
     }
 	
 	public void getImage() {
-		ImageIcon spring = new ImageIcon("graphics/Spring.png");
-		ImageIcon summer = new ImageIcon("graphics/Summer.png");
-		ImageIcon autumn = new ImageIcon("graphics/Autumn.png");
-		ImageIcon winter = new ImageIcon("graphics/Winter.png");
+		ImageIcon spring = new ImageIcon("graphics/FourSeasons/Spring.png");
+		ImageIcon summer = new ImageIcon("graphics/FourSeasons/Summer.png");
+		ImageIcon autumn = new ImageIcon("graphics/FourSeasons/Autumn.png");
+		ImageIcon winter = new ImageIcon("graphics/FourSeasons/Winter.png");
 		if (musicName == "Spring-1st Movement" || musicName == "Spring-2nd Movement" || musicName == "Spring-3rd Movement") {
 			lblImage.setIcon(spring);
 		}

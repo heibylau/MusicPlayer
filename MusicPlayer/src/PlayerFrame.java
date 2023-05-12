@@ -55,7 +55,7 @@ public class PlayerFrame extends JFrame {
 
 		
 		//Four Seasons playlist button
-		ImageIcon fs = new ImageIcon("graphics/Four_seasons_playlist_cover.png");
+		ImageIcon fs = new ImageIcon("graphics/FourSeasons/Four_seasons_playlist_cover.png");
 		btnFourSeasons = new JButton(fs);
 		btnFourSeasons.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
@@ -71,7 +71,7 @@ public class PlayerFrame extends JFrame {
 		contentPane.add(lblFourSeasons);
 
 		//NCS playlist button
-		ImageIcon ncs = new ImageIcon("graphics/NCS_playlist_cover.png");
+		ImageIcon ncs = new ImageIcon("graphics/NCS/NCS_playlist_cover.png");
 		btnNCS = new JButton(ncs);
 		btnNCS.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -87,7 +87,7 @@ public class PlayerFrame extends JFrame {
 		contentPane.add(lblNCS);
 		
 		//Tango button
-		ImageIcon tango = new ImageIcon("graphics/Tango_playlist_cover.jpg");
+		ImageIcon tango = new ImageIcon("graphics/Tango/Tango_playlist_cover.jpg");
 		btnTango = new JButton(tango);
 		btnTango.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {

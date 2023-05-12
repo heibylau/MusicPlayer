@@ -397,10 +397,10 @@ public class NCS extends JFrame{
     }
 	
 	public void getImage() {
-		ImageIcon hope = new ImageIcon("graphics/Hope.jpg");
-		ImageIcon infectious = new ImageIcon("graphics/Infectious.jpg");
-		ImageIcon cloud9 = new ImageIcon("graphics/Cloud9.jpg");
-		ImageIcon candyland = new ImageIcon("graphics/Candyland.jpg");
+		ImageIcon hope = new ImageIcon("graphics/NCS/Hope.jpg");
+		ImageIcon infectious = new ImageIcon("graphics/NCS/Infectious.jpg");
+		ImageIcon cloud9 = new ImageIcon("graphics/NCS/Cloud9.jpg");
+		ImageIcon candyland = new ImageIcon("graphics/NCS/Candyland.jpg");
 		if (musicName == "Hope - Tobu") {
 			lblImage.setIcon(hope);
 		}
