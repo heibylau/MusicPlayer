@@ -79,12 +79,15 @@ public class FourSeasons extends JFrame{
 	ImageIcon previous = new ImageIcon("graphics/PreviousButton.png");
 	ImageIcon next = new ImageIcon("graphics/NextButton.png");
 	ImageIcon nightMode = new ImageIcon("graphics/NightModeButton.png");
+	ImageIcon nightModeOff = new ImageIcon("graphics/NightModeOffButton.png");
+	ImageIcon loopOn = new ImageIcon("graphics/LoopOnButton.png");
+	ImageIcon loopOff = new ImageIcon("graphics/LoopOffButton.png");
 	ImageIcon play_white = new ImageIcon("graphics/PlayResumeButton_white.png");
 	ImageIcon resume_white = new ImageIcon("graphics/PlayResumeButton_white.png");
 	ImageIcon pause_white = new ImageIcon("graphics/PauseButton_white.png");
 	ImageIcon previous_white = new ImageIcon("graphics/PreviousButton_white.png");
 	ImageIcon next_white = new ImageIcon("graphics/NextButton_white.png");
-	ImageIcon nightMode_off = new ImageIcon("graphics/NightModeButton_off.png");
+
 	
 	public FourSeasons() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -158,13 +161,15 @@ public class FourSeasons extends JFrame{
 		btnNext.setBorderPainted(false);
 		contentPanel.add(btnNext);
 		
-		btnLoop = new JButton("Loop");
+		btnLoop = new JButton(loopOff);
 		btnLoop.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnLoop_mouseClicked(e);
 			}
 		});
-		btnLoop.setBounds(250, 400, 89, 23);
+		btnLoop.setBounds(300, 380, 50, 50);
+		btnLoop.setBackground(Color.WHITE);
+		btnLoop.setBorderPainted(false);
 		contentPanel.add(btnLoop);
 		
 
@@ -261,11 +266,13 @@ public class FourSeasons extends JFrame{
             	if (!isLooped) {
                     playlist.loop(); 
                     descriptionList.loop();
+                    btnLoop.setIcon(loopOn);
             		isLooped = true;
             		System.out.println("looping");
             	} else {
             		playlist.unLoop();
             		descriptionList.unLoop();
+            		btnLoop.setIcon(loopOff);
             		isLooped = false;
             		System.out.println("unlooped");
             	}
@@ -288,7 +295,8 @@ public class FourSeasons extends JFrame{
 			btnPrevious.setBackground(Color.BLACK);
 			btnNext.setIcon(next_white);
 			btnNext.setBackground(Color.BLACK);
-			btnNightMode.setIcon(nightMode_off);
+			btnNightMode.setIcon(nightModeOff);
+			btnLoop.setBackground(Color.BLACK);
 			contentPanel.setBackground(Color.BLACK);
 			lblTitle.setForeground(Color.WHITE);
 			isNightMode = true;
@@ -304,6 +312,7 @@ public class FourSeasons extends JFrame{
 			btnNext.setIcon(next);
 			btnNext.setBackground(Color.WHITE);
 			btnNightMode.setIcon(nightMode);
+			btnLoop.setBackground(Color.WHITE);
 			contentPanel.setBackground(Color.WHITE);
 			lblTitle.setForeground(Color.BLACK);
 			isNightMode = false;
