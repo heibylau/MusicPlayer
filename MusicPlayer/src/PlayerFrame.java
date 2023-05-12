@@ -1,8 +1,10 @@
 import java.awt.EventQueue;
+import java.awt.Color;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -84,13 +86,15 @@ public class PlayerFrame extends JFrame {
 		contentPane.add(lblNCS);
 		
 		//Tango button
-		btnTango = new JButton("Tango");
+		ImageIcon tango = new ImageIcon("graphics/Tango_playlist_cover.jpg");
+		btnTango = new JButton(tango);
 		btnTango.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnTango_mouseClicked(e);
 			}
 		});
-		btnTango.setBounds(200, 250, 89, 23);
+		btnTango.setBounds(75, 325, 100, 100);
+		btnTango.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(btnTango);
 		
 		//Test playlist button
