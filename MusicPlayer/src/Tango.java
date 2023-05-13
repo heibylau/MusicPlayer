@@ -398,21 +398,10 @@ public class Tango extends JFrame{
     }
 	
 	public void getImage() {
-		ImageIcon hope = new ImageIcon("graphics/Hope.jpg");
-		ImageIcon infectious = new ImageIcon("graphics/Infectious.jpg");
-		ImageIcon cloud9 = new ImageIcon("graphics/Cloud9.jpg");
-		ImageIcon candyland = new ImageIcon("graphics/Candyland.jpg");
-		if (musicName == "Hope - Tobu") {
-			lblImage.setIcon(hope);
-		}
-		if (musicName == "Infectious - Tobu") {
-			lblImage.setIcon(infectious);
-		}
-		if (musicName == "Cloud 9 - Itro & Tobu") {
-			lblImage.setIcon(cloud9);
-		}
-		if (musicName == "Candyland - Tobu") {
-			lblImage.setIcon(candyland);
+		ImageIcon nightclub = new ImageIcon("graphics/Tango/Nightclub.png");
+
+		if (musicName == "Nightclub 1960 - Astor Piazzolla") {
+			lblImage.setIcon(nightclub);
 		}
 	}
 
