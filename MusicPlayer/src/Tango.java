@@ -399,10 +399,7 @@ public class Tango extends JFrame{
 	
 	public void getImage() {
 		ImageIcon nightclub = new ImageIcon("graphics/Tango/Nightclub.png");
-
-		if (musicName == "Nightclub 1960 - Astor Piazzolla") {
-			lblImage.setIcon(nightclub);
-		}
+		lblImage.setIcon(nightclub);
 	}
 
     public void pause() {
