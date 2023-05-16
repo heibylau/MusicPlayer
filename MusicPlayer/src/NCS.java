@@ -329,12 +329,10 @@ public class NCS extends JFrame{
                     		fileName = (String) playlist.getHead();
                     		musicName = (String) descriptionList.getHead();
                     		lblImage.setIcon((Icon) imageList.getHead());
-                        	System.out.println(musicName);
                         	lblTitle.setText(musicName);
                             currentClip = toWAV(fileName);
                             currentClip.start();
                     	} else {
-                    		System.out.println(musicName);
                     		lblTitle.setText(musicName);
                     		currentClip = toWAV(fileName);
                             currentClip.start();

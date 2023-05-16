@@ -119,8 +119,6 @@ public class PlayerFrame extends JFrame {
 		defaultBackground.setBounds(0, 0, 400, 600);
 		contentPane.add(defaultBackground);
 		
-		
-		
 	}
 	
 	protected void btnFourSeasons_mouseClicked(MouseEvent arg0) {

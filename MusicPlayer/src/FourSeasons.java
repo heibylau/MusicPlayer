@@ -370,13 +370,11 @@ public class FourSeasons extends JFrame{
                     		fileName = (String) playlist.getHead();
                     		musicName = (String) descriptionList.getHead();
                     		lblImage.setIcon((Icon) imageList.getHead());
-                        	System.out.println(musicName);
                         	lblTitle.setText(musicName);
                             currentClip = toWAV(fileName);
                             currentClip.start();
                             getImage();
                     	} else {
-                    		System.out.println(musicName);
                     		lblTitle.setText(musicName);
                     		currentClip = toWAV(fileName);
                             currentClip.start();
@@ -405,7 +403,6 @@ public class FourSeasons extends JFrame{
                                     clipPosition = 0;
                                     fileName = (String) playlist.next();
                                     musicName = (String) descriptionList.next();
-                                    System.out.println(musicName);
                                     lblTitle.setText(musicName);
                                     lblImage.setIcon((Icon) imageList.next());
                                     currentClip = toWAV(fileName);
@@ -423,7 +420,6 @@ public class FourSeasons extends JFrame{
                                     clipPosition = 0;
                                     fileName = (String) playlist.previous();
                                     musicName = (String) descriptionList.previous();
-                                    System.out.println(musicName);
                                     lblTitle.setText(musicName);
                                     lblImage.setIcon((Icon) imageList.previous());
                                     currentClip = toWAV(fileName);
