@@ -1,9 +1,9 @@
 public class Node {
 	protected Node next;
 	protected Node previous;
-	protected String value;
+	protected Object value;
 
-	public Node(String value, Node previous, Node next)
+	public Node(Object value, Node previous, Node next)
 	{
 		this.value = value;
 		this.previous = previous;

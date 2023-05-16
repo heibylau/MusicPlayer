@@ -6,8 +6,8 @@ public class CircularLinkedList {
 	Node lastNode;
 	Node tail;
 	
-	public void add(String name) {
-		Node newNode = new Node(name, null , null);
+	public void add(Object o) {
+		Node newNode = new Node(o, null , null);
 		Node current = head;
 		
 		if (head == null) {
@@ -28,9 +28,9 @@ public class CircularLinkedList {
 			newNode.previous = current;
 		}
 	}
-
+	
 	public String getHead() {
-		return head.value;
+		return (String) head.value;
 	}
 	
 	public boolean hasNext() {

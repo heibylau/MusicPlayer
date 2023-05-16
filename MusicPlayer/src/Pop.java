@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -8,7 +9,6 @@ import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class NCS extends JFrame{
+public class Pop extends JFrame{
 	private final JPanel contentPanel = new JPanel();
 	private boolean isPaused = false;
     private boolean isLooped = false;
@@ -30,10 +30,10 @@ public class NCS extends JFrame{
     Thread playThread;
     
 	//files
-	MusicTrack Hope = new MusicTrack("music/NCS/Hope.wav", "Hope - Tobu");
-	MusicTrack Infectious = new MusicTrack("music/NCS/Infectious.wav", "Infectious - Tobu");
-	MusicTrack Cloud9 = new MusicTrack("music/NCS/Cloud9.wav", "Cloud 9 - Itro & Tobu");
-	MusicTrack Candyland = new MusicTrack("music/NCS/Candyland.wav", "Candyland - Tobu");
+	MusicTrack Bordel = new MusicTrack("music/Tango/Bordel 1900.wav", "Bordel 1900 - Astor Piazzolla");
+	MusicTrack Cafe = new MusicTrack("music/Tango/Cafe 1930.wav", "Cafe 1930 - Astor Piazzolla");
+	MusicTrack Nightclub = new MusicTrack("music/Tango/Nightclub 1960.wav", "Nightclub 1960 - Astor Piazzolla");
+	MusicTrack Concert = new MusicTrack("music/Tango/Concert.wav", "Modern-day Concert - Astor Piazzolla");
 
 	//button
 	private JButton btnPlay;
@@ -55,7 +55,6 @@ public class NCS extends JFrame{
 	//LinkedList
 	CircularLinkedList playlist = new CircularLinkedList();
 	CircularLinkedList descriptionList = new CircularLinkedList();
-	CircularLinkedList imageList = new CircularLinkedList();
 
 	//Images
 	ImageIcon play = new ImageIcon("graphics/PlayResumeButton.png");
@@ -72,12 +71,8 @@ public class NCS extends JFrame{
 	ImageIcon pause_white = new ImageIcon("graphics/PauseButton_white.png");
 	ImageIcon previous_white = new ImageIcon("graphics/PreviousButton_white.png");
 	ImageIcon next_white = new ImageIcon("graphics/NextButton_white.png");
-	ImageIcon hope = new ImageIcon("graphics/NCS/Hope.jpg");
-	ImageIcon infectious = new ImageIcon("graphics/NCS/Infectious.jpg");
-	ImageIcon cloud9 = new ImageIcon("graphics/NCS/Cloud9.jpg");
-	ImageIcon candyland = new ImageIcon("graphics/NCS/Candyland.jpg");
 	
-	public NCS() {
+	public Pop() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 400, 600);
 		getContentPane().setLayout(new BorderLayout());
@@ -184,23 +179,17 @@ public class NCS extends JFrame{
 		
 		
 		//add files
-		playlist.add(Hope.getFileName());
-		playlist.add(Infectious.getFileName());
-		playlist.add(Cloud9.getFileName());
-		playlist.add(Candyland.getFileName());
+		playlist.add(Bordel.getFileName());
+		playlist.add(Cafe.getFileName());
+		playlist.add(Nightclub.getFileName());
+		playlist.add(Concert.getFileName());
 
 		
 		//add descriptions
-		descriptionList.add(Hope.getDescription());
-		descriptionList.add(Infectious.getDescription());
-		descriptionList.add(Cloud9.getDescription());
-		descriptionList.add(Candyland.getDescription());
-		
-		//add images
-		imageList.add(hope);
-		imageList.add(infectious);
-		imageList.add(cloud9);
-		imageList.add(candyland);
+		descriptionList.add(Bordel.getDescription());
+		descriptionList.add(Cafe.getDescription());
+		descriptionList.add(Nightclub.getDescription());
+		descriptionList.add(Concert.getDescription());
 
 
 		//clip
@@ -246,7 +235,6 @@ public class NCS extends JFrame{
             	if (!isLooped) {
                     playlist.loop(); 
                     descriptionList.loop();
-                    imageList.loop();
                     btnLoop.setIcon(loopOn);
             		isLooped = true;
             		System.out.println("looping");
@@ -341,7 +329,7 @@ public class NCS extends JFrame{
                     	}
                     	
                         while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
-//                        	getImage();
+                        	getImage();
                         	if(isPaused) {
                                 if (currentClip != null && currentClip.isRunning()) {
                                     currentClip.stop();
@@ -364,7 +352,6 @@ public class NCS extends JFrame{
                                     musicName = (String) descriptionList.next();
                                     System.out.println(musicName);
                                     lblTitle.setText(musicName);
-                                    lblImage.setIcon((Icon) imageList.next());
                                     currentClip = toWAV(fileName);
                                     if(!isPaused) {
                                         currentClip.start();
@@ -382,7 +369,6 @@ public class NCS extends JFrame{
                                     musicName = (String) descriptionList.previous();
                                     System.out.println(musicName);
                                     lblTitle.setText(musicName);
-                                    lblImage.setIcon((Icon) imageList.previous());
                                     currentClip = toWAV(fileName);
                                     if(!isPaused) {
                                         currentClip.start();
@@ -399,7 +385,6 @@ public class NCS extends JFrame{
                         if (currentClip.getMicrosecondLength() == currentClip.getMicrosecondPosition()) {
                     		fileName = (String) playlist.next();
                     		musicName = (String) descriptionList.next();
-                            lblImage.setIcon((Icon) imageList.next());
                         }
 
                     }
@@ -413,18 +398,8 @@ public class NCS extends JFrame{
     }
 	
 	public void getImage() {
-		if (musicName == "Hope - Tobu") {
-			lblImage.setIcon(hope);
-		}
-		if (musicName == "Infectious - Tobu") {
-			lblImage.setIcon(infectious);
-		}
-		if (musicName == "Cloud 9 - Itro & Tobu") {
-			lblImage.setIcon(cloud9);
-		}
-		if (musicName == "Candyland - Tobu") {
-			lblImage.setIcon(candyland);
-		}
+		ImageIcon nightclub = new ImageIcon("graphics/Tango/Nightclub.png");
+		lblImage.setIcon(nightclub);
 	}
 
     public void pause() {
