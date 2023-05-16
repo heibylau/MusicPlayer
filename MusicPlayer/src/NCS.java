@@ -253,6 +253,7 @@ public class NCS extends JFrame{
             	} else {
             		playlist.unLoop();
             		descriptionList.unLoop();
+            		imageList.unLoop();
             		btnLoop.setIcon(loopOff);
             		isLooped = false;
             		System.out.println("unlooped");
@@ -325,23 +326,21 @@ public class NCS extends JFrame{
             	try {
                     while (!isPaused && playlist.hasNext()) {
                     	if (fileName == "") {
-                    		fileName = playlist.getHead();
-                    		musicName = descriptionList.getHead();
+                    		fileName = (String) playlist.getHead();
+                    		musicName = (String) descriptionList.getHead();
+                    		lblImage.setIcon((Icon) imageList.getHead());
                         	System.out.println(musicName);
                         	lblTitle.setText(musicName);
                             currentClip = toWAV(fileName);
                             currentClip.start();
-                            getImage();
                     	} else {
                     		System.out.println(musicName);
                     		lblTitle.setText(musicName);
                     		currentClip = toWAV(fileName);
                             currentClip.start();
-                            getImage();
                     	}
                     	
                         while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
-//                        	getImage();
                         	if(isPaused) {
                                 if (currentClip != null && currentClip.isRunning()) {
                                     currentClip.stop();
@@ -412,21 +411,6 @@ public class NCS extends JFrame{
 
     }
 	
-	public void getImage() {
-		if (musicName == "Hope - Tobu") {
-			lblImage.setIcon(hope);
-		}
-		if (musicName == "Infectious - Tobu") {
-			lblImage.setIcon(infectious);
-		}
-		if (musicName == "Cloud 9 - Itro & Tobu") {
-			lblImage.setIcon(cloud9);
-		}
-		if (musicName == "Candyland - Tobu") {
-			lblImage.setIcon(candyland);
-		}
-	}
-
     public void pause() {
         isPaused = true;
     }

@@ -71,6 +71,7 @@ public class Tango extends JFrame{
 	ImageIcon pause_white = new ImageIcon("graphics/PauseButton_white.png");
 	ImageIcon previous_white = new ImageIcon("graphics/PreviousButton_white.png");
 	ImageIcon next_white = new ImageIcon("graphics/NextButton_white.png");
+	ImageIcon nightclub = new ImageIcon("graphics/Tango/Nightclub.png");
 	
 	public Tango() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -312,24 +313,22 @@ public class Tango extends JFrame{
             public void run() {
             	try {
                     while (!isPaused && playlist.hasNext()) {
+                    	lblImage.setIcon(nightclub);
                     	if (fileName == "") {
-                    		fileName = playlist.getHead();
-                    		musicName = descriptionList.getHead();
+                    		fileName = (String) playlist.getHead();
+                    		musicName = (String) descriptionList.getHead();
                         	System.out.println(musicName);
                         	lblTitle.setText(musicName);
                             currentClip = toWAV(fileName);
                             currentClip.start();
-                            getImage();
                     	} else {
                     		System.out.println(musicName);
                     		lblTitle.setText(musicName);
                     		currentClip = toWAV(fileName);
                             currentClip.start();
-                            getImage();
                     	}
                     	
                         while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
-                        	getImage();
                         	if(isPaused) {
                                 if (currentClip != null && currentClip.isRunning()) {
                                     currentClip.stop();
@@ -398,7 +397,7 @@ public class Tango extends JFrame{
     }
 	
 	public void getImage() {
-		ImageIcon nightclub = new ImageIcon("graphics/Tango/Nightclub.png");
+
 		lblImage.setIcon(nightclub);
 	}
 

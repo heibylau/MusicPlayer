@@ -29,8 +29,8 @@ public class CircularLinkedList {
 		}
 	}
 	
-	public String getHead() {
-		return (String) head.value;
+	public Object getHead() {
+		return head.value;
 	}
 	
 	public boolean hasNext() {

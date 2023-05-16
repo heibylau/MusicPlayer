@@ -16,6 +16,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -38,18 +39,18 @@ public class FourSeasons extends JFrame{
     Thread playThread;
     
 	//files
-	MusicTrack Spring1 = new MusicTrack("music/FourSeasons/Spring_1st_movement.wav", "Spring-1st Movement");
-	MusicTrack Spring2 = new MusicTrack("music/FourSeasons/Spring_2nd_movement.wav", "Spring-2nd Movement");
-	MusicTrack Spring3 = new MusicTrack("music/FourSeasons/Spring_3rd_movement.wav", "Spring-3rd Movement");
-	MusicTrack Summer1 = new MusicTrack("music/FourSeasons/Summer_1st_movement.wav", "Summer-1st Movement");
-	MusicTrack Summer2 = new MusicTrack("music/FourSeasons/Summer_2nd_movement.wav", "Summer-2nd Movement");
-	MusicTrack Summer3 = new MusicTrack("music/FourSeasons/Summer_3rd_movement.wav", "Summer-3rd Movement");
-	MusicTrack Autumn1 = new MusicTrack("music/FourSeasons/Autumn_1st_movement.wav", "Autumn-1st Movement");
-	MusicTrack Autumn2 = new MusicTrack("music/FourSeasons/Autumn_2nd_movement.wav", "Autumn-2nd Movement");
-	MusicTrack Autumn3 = new MusicTrack("music/FourSeasons/Autumn_3rd_movement.wav", "Autumn-3rd Movement");
-	MusicTrack Winter1 = new MusicTrack("music/FourSeasons/Winter_1st_movement.wav", "Winter-1st Movement");
-	MusicTrack Winter2 = new MusicTrack("music/FourSeasons/Winter_2nd_movement.wav", "Winter-2nd Movement");
-	MusicTrack Winter3 = new MusicTrack("music/FourSeasons/Winter_3rd_movement.wav", "Winter-3rd Movement");
+	MusicTrack Spring1 = new MusicTrack("music/FourSeasons/Spring_1st_movement.wav", "Spring-1st Movement - Antonio Vivaldi");
+	MusicTrack Spring2 = new MusicTrack("music/FourSeasons/Spring_2nd_movement.wav", "Spring-2nd Movement - Antonio Vivaldi");
+	MusicTrack Spring3 = new MusicTrack("music/FourSeasons/Spring_3rd_movement.wav", "Spring-3rd Movement - Antonio Vivaldi");
+	MusicTrack Summer1 = new MusicTrack("music/FourSeasons/Summer_1st_movement.wav", "Summer-1st Movement - Antonio Vivaldi");
+	MusicTrack Summer2 = new MusicTrack("music/FourSeasons/Summer_2nd_movement.wav", "Summer-2nd Movement - Antonio Vivaldi");
+	MusicTrack Summer3 = new MusicTrack("music/FourSeasons/Summer_3rd_movement.wav", "Summer-3rd Movement - Antonio Vivaldi");
+	MusicTrack Autumn1 = new MusicTrack("music/FourSeasons/Autumn_1st_movement.wav", "Autumn-1st Movement - Antonio Vivaldi");
+	MusicTrack Autumn2 = new MusicTrack("music/FourSeasons/Autumn_2nd_movement.wav", "Autumn-2nd Movement - Antonio Vivaldi");
+	MusicTrack Autumn3 = new MusicTrack("music/FourSeasons/Autumn_3rd_movement.wav", "Autumn-3rd Movement - Antonio Vivaldi");
+	MusicTrack Winter1 = new MusicTrack("music/FourSeasons/Winter_1st_movement.wav", "Winter-1st Movement - Antonio Vivaldi");
+	MusicTrack Winter2 = new MusicTrack("music/FourSeasons/Winter_2nd_movement.wav", "Winter-2nd Movement - Antonio Vivaldi");
+	MusicTrack Winter3 = new MusicTrack("music/FourSeasons/Winter_3rd_movement.wav", "Winter-3rd Movement - Antonio Vivaldi");
 
 	//button
 	private JButton btnPlay;
@@ -71,6 +72,7 @@ public class FourSeasons extends JFrame{
 	//LinkedList
 	CircularLinkedList playlist = new CircularLinkedList();
 	CircularLinkedList descriptionList = new CircularLinkedList();
+	CircularLinkedList imageList = new CircularLinkedList();
 
 	//Images
 	ImageIcon play = new ImageIcon("graphics/PlayResumeButton.png");
@@ -87,6 +89,10 @@ public class FourSeasons extends JFrame{
 	ImageIcon pause_white = new ImageIcon("graphics/PauseButton_white.png");
 	ImageIcon previous_white = new ImageIcon("graphics/PreviousButton_white.png");
 	ImageIcon next_white = new ImageIcon("graphics/NextButton_white.png");
+	ImageIcon spring = new ImageIcon("graphics/FourSeasons/Spring.png");
+	ImageIcon summer = new ImageIcon("graphics/FourSeasons/Summer.png");
+	ImageIcon autumn = new ImageIcon("graphics/FourSeasons/Autumn.png");
+	ImageIcon winter = new ImageIcon("graphics/FourSeasons/Winter.png");
 
 	
 	public FourSeasons() {
@@ -222,6 +228,20 @@ public class FourSeasons extends JFrame{
 		descriptionList.add(Winter1.getDescription());
 		descriptionList.add(Winter2.getDescription());
 		descriptionList.add(Winter3.getDescription());
+		
+		//add images
+		imageList.add(spring);
+		imageList.add(spring);
+		imageList.add(spring);
+		imageList.add(summer);
+		imageList.add(summer);
+		imageList.add(summer);
+		imageList.add(autumn);
+		imageList.add(autumn);
+		imageList.add(autumn);
+		imageList.add(winter);
+		imageList.add(winter);
+		imageList.add(winter);
 
 		//clip
 		currentClip = null;
@@ -266,12 +286,14 @@ public class FourSeasons extends JFrame{
             	if (!isLooped) {
                     playlist.loop(); 
                     descriptionList.loop();
+                    imageList.loop();
                     btnLoop.setIcon(loopOn);
             		isLooped = true;
             		System.out.println("looping");
             	} else {
             		playlist.unLoop();
             		descriptionList.unLoop();
+            		imageList.unLoop();
             		btnLoop.setIcon(loopOff);
             		isLooped = false;
             		System.out.println("unlooped");
@@ -345,8 +367,9 @@ public class FourSeasons extends JFrame{
             	try {
                     while (!isPaused && playlist.hasNext()) {
                     	if (fileName == "") {
-                    		fileName = playlist.getHead();
-                    		musicName = descriptionList.getHead();
+                    		fileName = (String) playlist.getHead();
+                    		musicName = (String) descriptionList.getHead();
+                    		lblImage.setIcon((Icon) imageList.getHead());
                         	System.out.println(musicName);
                         	lblTitle.setText(musicName);
                             currentClip = toWAV(fileName);
@@ -384,6 +407,7 @@ public class FourSeasons extends JFrame{
                                     musicName = (String) descriptionList.next();
                                     System.out.println(musicName);
                                     lblTitle.setText(musicName);
+                                    lblImage.setIcon((Icon) imageList.next());
                                     currentClip = toWAV(fileName);
                                     if(!isPaused) {
                                         currentClip.start();
@@ -401,6 +425,7 @@ public class FourSeasons extends JFrame{
                                     musicName = (String) descriptionList.previous();
                                     System.out.println(musicName);
                                     lblTitle.setText(musicName);
+                                    lblImage.setIcon((Icon) imageList.previous());
                                     currentClip = toWAV(fileName);
                                     if(!isPaused) {
                                         currentClip.start();
@@ -417,6 +442,7 @@ public class FourSeasons extends JFrame{
                         if (currentClip.getMicrosecondLength() == currentClip.getMicrosecondPosition()) {
                     		fileName = (String) playlist.next();
                     		musicName = (String) descriptionList.next();
+                    		lblImage.setIcon((Icon) imageList.next());
                         }
 
                     }
@@ -430,10 +456,6 @@ public class FourSeasons extends JFrame{
     }
 	
 	public void getImage() {
-		ImageIcon spring = new ImageIcon("graphics/FourSeasons/Spring.png");
-		ImageIcon summer = new ImageIcon("graphics/FourSeasons/Summer.png");
-		ImageIcon autumn = new ImageIcon("graphics/FourSeasons/Autumn.png");
-		ImageIcon winter = new ImageIcon("graphics/FourSeasons/Winter.png");
 		if (musicName == "Spring-1st Movement" || musicName == "Spring-2nd Movement" || musicName == "Spring-3rd Movement") {
 			lblImage.setIcon(spring);
 		}

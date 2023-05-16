@@ -131,9 +131,9 @@ public class PlayerFrame extends JFrame {
 	}
 	
 	protected void btnTest_mouseClicked(MouseEvent arg0) {
-		TestPlaylist test = new TestPlaylist();
-		test.setLocationRelativeTo(this);
-		test.setVisible(true);
+		Pop pop = new Pop();
+		pop.setLocationRelativeTo(this);
+		pop.setVisible(true);
 		this.repaint();
 	}
 	

@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -9,6 +8,7 @@ import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,10 +30,10 @@ public class Pop extends JFrame{
     Thread playThread;
     
 	//files
-	MusicTrack Bordel = new MusicTrack("music/Tango/Bordel 1900.wav", "Bordel 1900 - Astor Piazzolla");
-	MusicTrack Cafe = new MusicTrack("music/Tango/Cafe 1930.wav", "Cafe 1930 - Astor Piazzolla");
-	MusicTrack Nightclub = new MusicTrack("music/Tango/Nightclub 1960.wav", "Nightclub 1960 - Astor Piazzolla");
-	MusicTrack Concert = new MusicTrack("music/Tango/Concert.wav", "Modern-day Concert - Astor Piazzolla");
+	MusicTrack track1 = new MusicTrack("music/Pop/Thunder.wav", "Thunder - Imagine Dragons");
+	MusicTrack track2 = new MusicTrack("music/Pop/Gotye.wav", "Somebody That I Used To Know - Gotye");
+	MusicTrack track3 = new MusicTrack("music/NCS/Cloud9.wav", "Cloud 9 - Itro & Tobu");
+	MusicTrack track4 = new MusicTrack("music/NCS/Candyland.wav", "Candyland - Tobu");
 
 	//button
 	private JButton btnPlay;
@@ -55,6 +55,7 @@ public class Pop extends JFrame{
 	//LinkedList
 	CircularLinkedList playlist = new CircularLinkedList();
 	CircularLinkedList descriptionList = new CircularLinkedList();
+	CircularLinkedList imageList = new CircularLinkedList();
 
 	//Images
 	ImageIcon play = new ImageIcon("graphics/PlayResumeButton.png");
@@ -71,6 +72,10 @@ public class Pop extends JFrame{
 	ImageIcon pause_white = new ImageIcon("graphics/PauseButton_white.png");
 	ImageIcon previous_white = new ImageIcon("graphics/PreviousButton_white.png");
 	ImageIcon next_white = new ImageIcon("graphics/NextButton_white.png");
+	ImageIcon hope = new ImageIcon("graphics/NCS/Hope.jpg");
+	ImageIcon infectious = new ImageIcon("graphics/NCS/Infectious.jpg");
+	ImageIcon cloud9 = new ImageIcon("graphics/NCS/Cloud9.jpg");
+	ImageIcon candyland = new ImageIcon("graphics/NCS/Candyland.jpg");
 	
 	public Pop() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -179,17 +184,23 @@ public class Pop extends JFrame{
 		
 		
 		//add files
-		playlist.add(Bordel.getFileName());
-		playlist.add(Cafe.getFileName());
-		playlist.add(Nightclub.getFileName());
-		playlist.add(Concert.getFileName());
+		playlist.add(track1.getFileName());
+		playlist.add(track2.getFileName());
+		playlist.add(track3.getFileName());
+		playlist.add(track4.getFileName());
 
 		
 		//add descriptions
-		descriptionList.add(Bordel.getDescription());
-		descriptionList.add(Cafe.getDescription());
-		descriptionList.add(Nightclub.getDescription());
-		descriptionList.add(Concert.getDescription());
+		descriptionList.add(track1.getDescription());
+		descriptionList.add(track2.getDescription());
+		descriptionList.add(track3.getDescription());
+		descriptionList.add(track4.getDescription());
+		
+		//add images
+		imageList.add(hope);
+		imageList.add(infectious);
+		imageList.add(cloud9);
+		imageList.add(candyland);
 
 
 		//clip
@@ -235,12 +246,14 @@ public class Pop extends JFrame{
             	if (!isLooped) {
                     playlist.loop(); 
                     descriptionList.loop();
+                    imageList.loop();
                     btnLoop.setIcon(loopOn);
             		isLooped = true;
             		System.out.println("looping");
             	} else {
             		playlist.unLoop();
             		descriptionList.unLoop();
+            		imageList.unLoop();
             		btnLoop.setIcon(loopOff);
             		isLooped = false;
             		System.out.println("unlooped");
@@ -313,23 +326,21 @@ public class Pop extends JFrame{
             	try {
                     while (!isPaused && playlist.hasNext()) {
                     	if (fileName == "") {
-                    		fileName = playlist.getHead();
-                    		musicName = descriptionList.getHead();
+                    		fileName = (String) playlist.getHead();
+                    		musicName = (String) descriptionList.getHead();
+                    		lblImage.setIcon((Icon) imageList.getHead());
                         	System.out.println(musicName);
                         	lblTitle.setText(musicName);
                             currentClip = toWAV(fileName);
                             currentClip.start();
-                            getImage();
                     	} else {
                     		System.out.println(musicName);
                     		lblTitle.setText(musicName);
                     		currentClip = toWAV(fileName);
                             currentClip.start();
-                            getImage();
                     	}
                     	
                         while (currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
-                        	getImage();
                         	if(isPaused) {
                                 if (currentClip != null && currentClip.isRunning()) {
                                     currentClip.stop();
@@ -352,6 +363,7 @@ public class Pop extends JFrame{
                                     musicName = (String) descriptionList.next();
                                     System.out.println(musicName);
                                     lblTitle.setText(musicName);
+                                    lblImage.setIcon((Icon) imageList.next());
                                     currentClip = toWAV(fileName);
                                     if(!isPaused) {
                                         currentClip.start();
@@ -369,6 +381,7 @@ public class Pop extends JFrame{
                                     musicName = (String) descriptionList.previous();
                                     System.out.println(musicName);
                                     lblTitle.setText(musicName);
+                                    lblImage.setIcon((Icon) imageList.previous());
                                     currentClip = toWAV(fileName);
                                     if(!isPaused) {
                                         currentClip.start();
@@ -385,6 +398,7 @@ public class Pop extends JFrame{
                         if (currentClip.getMicrosecondLength() == currentClip.getMicrosecondPosition()) {
                     		fileName = (String) playlist.next();
                     		musicName = (String) descriptionList.next();
+                            lblImage.setIcon((Icon) imageList.next());
                         }
 
                     }
@@ -397,11 +411,6 @@ public class Pop extends JFrame{
 
     }
 	
-	public void getImage() {
-		ImageIcon nightclub = new ImageIcon("graphics/Tango/Nightclub.png");
-		lblImage.setIcon(nightclub);
-	}
-
     public void pause() {
         isPaused = true;
     }
