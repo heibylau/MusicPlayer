@@ -23,7 +23,7 @@ public class PlayerFrame extends JFrame {
 	private JLabel lblNCS;
 	private JLabel lblTango;
 	
-	private JButton btnTest;
+	private JButton btnPop;
 
 	/**
 	 * Launch the application.
@@ -69,6 +69,16 @@ public class PlayerFrame extends JFrame {
 		lblFourSeasons = new JLabel("Four Seasons");
 		lblFourSeasons.setBounds(82, 255, 200, 20);
 		contentPane.add(lblFourSeasons);
+		
+		//Pop playlist button
+		btnPop = new JButton("Pop");
+		btnPop.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				btnPop_mouseClicked(e);
+			}
+		});
+		btnPop.setBounds(225, 150, 100, 100);
+		contentPane.add(btnPop);
 
 		//NCS playlist button
 		ImageIcon ncs = new ImageIcon("graphics/NCS/NCS_playlist_cover.png");
@@ -102,16 +112,6 @@ public class PlayerFrame extends JFrame {
 		lblTango = new JLabel("Tango");
 		lblTango.setBounds(110, 430, 100, 20);
 		contentPane.add(lblTango);
-		
-		//Test playlist button
-		btnTest = new JButton("Test");
-		btnTest.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				btnTest_mouseClicked(e);
-			}
-		});
-		btnTest.setBounds(200, 200, 89, 23);
-		contentPane.add(btnTest);
 
 		//Background
 		ImageIcon def = new ImageIcon("background/Default_background.png");
@@ -128,7 +128,7 @@ public class PlayerFrame extends JFrame {
 		this.repaint();
 	}
 	
-	protected void btnTest_mouseClicked(MouseEvent arg0) {
+	protected void btnPop_mouseClicked(MouseEvent arg0) {
 		Pop pop = new Pop();
 		pop.setLocationRelativeTo(this);
 		pop.setVisible(true);

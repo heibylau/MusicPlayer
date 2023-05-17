@@ -32,8 +32,8 @@ public class Pop extends JFrame{
 	//files
 	MusicTrack track1 = new MusicTrack("music/Pop/Thunder.wav", "Thunder - Imagine Dragons");
 	MusicTrack track2 = new MusicTrack("music/Pop/Gotye.wav", "Somebody That I Used To Know - Gotye");
-	MusicTrack track3 = new MusicTrack("music/NCS/Cloud9.wav", "Cloud 9 - Itro & Tobu");
-	MusicTrack track4 = new MusicTrack("music/NCS/Candyland.wav", "Candyland - Tobu");
+	MusicTrack track3 = new MusicTrack("music/Pop/Late_night_talking.wav", "Late Night Talking - Harry Styles");
+	MusicTrack track4 = new MusicTrack("music/Pop/Chasing_cars.wav", "Chasing Cars - Snow Patrol");
 
 	//button
 	private JButton btnPlay;
@@ -72,10 +72,10 @@ public class Pop extends JFrame{
 	ImageIcon pause_white = new ImageIcon("graphics/PauseButton_white.png");
 	ImageIcon previous_white = new ImageIcon("graphics/PreviousButton_white.png");
 	ImageIcon next_white = new ImageIcon("graphics/NextButton_white.png");
-	ImageIcon hope = new ImageIcon("graphics/NCS/Hope.jpg");
-	ImageIcon infectious = new ImageIcon("graphics/NCS/Infectious.jpg");
-	ImageIcon cloud9 = new ImageIcon("graphics/NCS/Cloud9.jpg");
-	ImageIcon candyland = new ImageIcon("graphics/NCS/Candyland.jpg");
+	ImageIcon image1 = new ImageIcon("graphics/Pop/Thunder.jpg");
+	ImageIcon image2 = new ImageIcon("graphics/Pop/Gotye.jpg");
+	ImageIcon image3 = new ImageIcon("graphics/Pop/Late_night_talking.jpg");
+	ImageIcon image4 = new ImageIcon("graphics/Pop/Chasing_cars.jpeg");
 	
 	public Pop() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -197,10 +197,10 @@ public class Pop extends JFrame{
 		descriptionList.add(track4.getDescription());
 		
 		//add images
-		imageList.add(hope);
-		imageList.add(infectious);
-		imageList.add(cloud9);
-		imageList.add(candyland);
+		imageList.add(image1);
+		imageList.add(image2);
+		imageList.add(image3);
+		imageList.add(image4);
 
 
 		//clip
@@ -329,12 +329,10 @@ public class Pop extends JFrame{
                     		fileName = (String) playlist.getHead();
                     		musicName = (String) descriptionList.getHead();
                     		lblImage.setIcon((Icon) imageList.getHead());
-                        	System.out.println(musicName);
                         	lblTitle.setText(musicName);
                             currentClip = toWAV(fileName);
                             currentClip.start();
                     	} else {
-                    		System.out.println(musicName);
                     		lblTitle.setText(musicName);
                     		currentClip = toWAV(fileName);
                             currentClip.start();
@@ -361,7 +359,6 @@ public class Pop extends JFrame{
                                     clipPosition = 0;
                                     fileName = (String) playlist.next();
                                     musicName = (String) descriptionList.next();
-                                    System.out.println(musicName);
                                     lblTitle.setText(musicName);
                                     lblImage.setIcon((Icon) imageList.next());
                                     currentClip = toWAV(fileName);
@@ -379,7 +376,6 @@ public class Pop extends JFrame{
                                     clipPosition = 0;
                                     fileName = (String) playlist.previous();
                                     musicName = (String) descriptionList.previous();
-                                    System.out.println(musicName);
                                     lblTitle.setText(musicName);
                                     lblImage.setIcon((Icon) imageList.previous());
                                     currentClip = toWAV(fileName);
