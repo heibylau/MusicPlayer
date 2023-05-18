@@ -317,12 +317,10 @@ public class Tango extends JFrame{
                     	if (fileName == "") {
                     		fileName = (String) playlist.getHead();
                     		musicName = (String) descriptionList.getHead();
-                        	System.out.println(musicName);
                         	lblTitle.setText(musicName);
                             currentClip = toWAV(fileName);
                             currentClip.start();
                     	} else {
-                    		System.out.println(musicName);
                     		lblTitle.setText(musicName);
                     		currentClip = toWAV(fileName);
                             currentClip.start();
@@ -349,7 +347,6 @@ public class Tango extends JFrame{
                                     clipPosition = 0;
                                     fileName = (String) playlist.next();
                                     musicName = (String) descriptionList.next();
-                                    System.out.println(musicName);
                                     lblTitle.setText(musicName);
                                     currentClip = toWAV(fileName);
                                     if(!isPaused) {
@@ -366,7 +363,6 @@ public class Tango extends JFrame{
                                     clipPosition = 0;
                                     fileName = (String) playlist.previous();
                                     musicName = (String) descriptionList.previous();
-                                    System.out.println(musicName);
                                     lblTitle.setText(musicName);
                                     currentClip = toWAV(fileName);
                                     if(!isPaused) {

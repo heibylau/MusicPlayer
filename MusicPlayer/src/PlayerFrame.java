@@ -16,14 +16,14 @@ public class PlayerFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnFourSeasons;
+	private JButton btnPop;
 	private JButton btnNCS;
 	private JButton btnTango;
 	private JLabel defaultBackground;
 	private JLabel lblFourSeasons;
+	private JLabel lblPop;
 	private JLabel lblNCS;
 	private JLabel lblTango;
-	
-	private JButton btnPop;
 
 	/**
 	 * Launch the application.
@@ -71,14 +71,21 @@ public class PlayerFrame extends JFrame {
 		contentPane.add(lblFourSeasons);
 		
 		//Pop playlist button
-		btnPop = new JButton("Pop");
+		ImageIcon pop = new ImageIcon("graphics/Pop/Pop_playlist_cover.jpeg");
+		btnPop = new JButton(pop);
 		btnPop.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnPop_mouseClicked(e);
 			}
 		});
 		btnPop.setBounds(225, 150, 100, 100);
+		btnPop.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(btnPop);
+		
+		//Pop playlist description
+		lblPop = new JLabel("Pop");
+		lblPop.setBounds(265, 255, 100, 20);
+		contentPane.add(lblPop);
 
 		//NCS playlist button
 		ImageIcon ncs = new ImageIcon("graphics/NCS/NCS_playlist_cover.png");
@@ -110,7 +117,7 @@ public class PlayerFrame extends JFrame {
 		
 		//Tango playlist description
 		lblTango = new JLabel("Tango");
-		lblTango.setBounds(110, 430, 100, 20);
+		lblTango.setBounds(105, 430, 100, 20);
 		contentPane.add(lblTango);
 
 		//Background
