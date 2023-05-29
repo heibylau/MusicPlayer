@@ -30,10 +30,10 @@ public class Tango extends JFrame{
     Thread playThread;
     
 	//files
-	MusicTrack Bordel = new MusicTrack("music/Tango/Bordel 1900.wav", "Bordel 1900 - Astor Piazzolla");
-	MusicTrack Cafe = new MusicTrack("music/Tango/Cafe 1930.wav", "Cafe 1930 - Astor Piazzolla");
-	MusicTrack Nightclub = new MusicTrack("music/Tango/Nightclub 1960.wav", "Nightclub 1960 - Astor Piazzolla");
-	MusicTrack Concert = new MusicTrack("music/Tango/Concert.wav", "Modern-day Concert - Astor Piazzolla");
+	MusicTrack Bordel = new MusicTrack("MusicPlayer/music/Tango/Bordel 1900.wav", "Bordel 1900 - Astor Piazzolla");
+	MusicTrack Cafe = new MusicTrack("MusicPlayer/music/Tango/Cafe 1930.wav", "Cafe 1930 - Astor Piazzolla");
+	MusicTrack Nightclub = new MusicTrack("MusicPlayer/music/Tango/Nightclub 1960.wav", "Nightclub 1960 - Astor Piazzolla");
+	MusicTrack Concert = new MusicTrack("MusicPlayer/music/Tango/Concert.wav", "Modern-day Concert - Astor Piazzolla");
 
 	//button
 	private JButton btnPlay;
@@ -57,21 +57,21 @@ public class Tango extends JFrame{
 	CircularLinkedList descriptionList = new CircularLinkedList();
 
 	//Images
-	ImageIcon play = new ImageIcon("graphics/PlayResumeButton.png");
-	ImageIcon pause = new ImageIcon("graphics/PauseButton.png");
-	ImageIcon resume = new ImageIcon("graphics/PlayResumeButton.png");
-	ImageIcon previous = new ImageIcon("graphics/PreviousButton.png");
-	ImageIcon next = new ImageIcon("graphics/NextButton.png");
-	ImageIcon nightMode = new ImageIcon("graphics/NightModeButton.png");
-	ImageIcon nightModeOff = new ImageIcon("graphics/NightModeOffButton.png");
-	ImageIcon loopOn = new ImageIcon("graphics/LoopOnButton.png");
-	ImageIcon loopOff = new ImageIcon("graphics/LoopOffButton.png");
-	ImageIcon play_white = new ImageIcon("graphics/PlayResumeButton_white.png");
-	ImageIcon resume_white = new ImageIcon("graphics/PlayResumeButton_white.png");
-	ImageIcon pause_white = new ImageIcon("graphics/PauseButton_white.png");
-	ImageIcon previous_white = new ImageIcon("graphics/PreviousButton_white.png");
-	ImageIcon next_white = new ImageIcon("graphics/NextButton_white.png");
-	ImageIcon nightclub = new ImageIcon("graphics/Tango/Nightclub.png");
+	ImageIcon play = new ImageIcon("MusicPlayer/graphics/PlayResumeButton.png");
+	ImageIcon pause = new ImageIcon("MusicPlayer/graphics/PauseButton.png");
+	ImageIcon resume = new ImageIcon("MusicPlayer/graphics/PlayResumeButton.png");
+	ImageIcon previous = new ImageIcon("MusicPlayer/graphics/PreviousButton.png");
+	ImageIcon next = new ImageIcon("MusicPlayer/graphics/NextButton.png");
+	ImageIcon nightMode = new ImageIcon("MusicPlayer/graphics/NightModeButton.png");
+	ImageIcon nightModeOff = new ImageIcon("MusicPlayer/graphics/NightModeOffButton.png");
+	ImageIcon loopOn = new ImageIcon("MusicPlayer/graphics/LoopOnButton.png");
+	ImageIcon loopOff = new ImageIcon("MusicPlayer/graphics/LoopOffButton.png");
+	ImageIcon play_white = new ImageIcon("MusicPlayer/graphics/PlayResumeButton_white.png");
+	ImageIcon resume_white = new ImageIcon("MusicPlayer/graphics/PlayResumeButton_white.png");
+	ImageIcon pause_white = new ImageIcon("MusicPlayer/graphics/PauseButton_white.png");
+	ImageIcon previous_white = new ImageIcon("MusicPlayer/graphics/PreviousButton_white.png");
+	ImageIcon next_white = new ImageIcon("MusicPlayer/graphics/NextButton_white.png");
+	ImageIcon nightclub = new ImageIcon("MusicPlayer/graphics/Tango/Nightclub.png");
 	
 	public Tango() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
