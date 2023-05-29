@@ -39,18 +39,18 @@ public class FourSeasons extends JFrame{
     Thread playThread;
     
 	//files
-	MusicTrack Spring1 = new MusicTrack("MusicPlayer/music/FourSeasons/Spring_1st_movement.wav", "Spring-1st Movement - Antonio Vivaldi");
-	MusicTrack Spring2 = new MusicTrack("MusicPlayer/music/FourSeasons/Spring_2nd_movement.wav", "Spring-2nd Movement - Antonio Vivaldi");
-	MusicTrack Spring3 = new MusicTrack("MusicPlayer/music/FourSeasons/Spring_3rd_movement.wav", "Spring-3rd Movement - Antonio Vivaldi");
-	MusicTrack Summer1 = new MusicTrack("MusicPlayer/music/FourSeasons/Summer_1st_movement.wav", "Summer-1st Movement - Antonio Vivaldi");
-	MusicTrack Summer2 = new MusicTrack("MusicPlayer/music/FourSeasons/Summer_2nd_movement.wav", "Summer-2nd Movement - Antonio Vivaldi");
-	MusicTrack Summer3 = new MusicTrack("MusicPlayer/music/FourSeasons/Summer_3rd_movement.wav", "Summer-3rd Movement - Antonio Vivaldi");
-	MusicTrack Autumn1 = new MusicTrack("MusicPlayer/music/FourSeasons/Autumn_1st_movement.wav", "Autumn-1st Movement - Antonio Vivaldi");
-	MusicTrack Autumn2 = new MusicTrack("MusicPlayer/music/FourSeasons/Autumn_2nd_movement.wav", "Autumn-2nd Movement - Antonio Vivaldi");
-	MusicTrack Autumn3 = new MusicTrack("MusicPlayer/music/FourSeasons/Autumn_3rd_movement.wav", "Autumn-3rd Movement - Antonio Vivaldi");
-	MusicTrack Winter1 = new MusicTrack("MusicPlayer/music/FourSeasons/Winter_1st_movement.wav", "Winter-1st Movement - Antonio Vivaldi");
-	MusicTrack Winter2 = new MusicTrack("MusicPlayer/music/FourSeasons/Winter_2nd_movement.wav", "Winter-2nd Movement - Antonio Vivaldi");
-	MusicTrack Winter3 = new MusicTrack("MusicPlayer/music/FourSeasons/Winter_3rd_movement.wav", "Winter-3rd Movement - Antonio Vivaldi");
+	MusicTrack Spring1 = new MusicTrack("music/FourSeasons/Spring_1st_movement.wav", "Spring-1st Movement - Antonio Vivaldi");
+	MusicTrack Spring2 = new MusicTrack("music/FourSeasons/Spring_2nd_movement.wav", "Spring-2nd Movement - Antonio Vivaldi");
+	MusicTrack Spring3 = new MusicTrack("music/FourSeasons/Spring_3rd_movement.wav", "Spring-3rd Movement - Antonio Vivaldi");
+	MusicTrack Summer1 = new MusicTrack("music/FourSeasons/Summer_1st_movement.wav", "Summer-1st Movement - Antonio Vivaldi");
+	MusicTrack Summer2 = new MusicTrack("music/FourSeasons/Summer_2nd_movement.wav", "Summer-2nd Movement - Antonio Vivaldi");
+	MusicTrack Summer3 = new MusicTrack("music/FourSeasons/Summer_3rd_movement.wav", "Summer-3rd Movement - Antonio Vivaldi");
+	MusicTrack Autumn1 = new MusicTrack("music/FourSeasons/Autumn_1st_movement.wav", "Autumn-1st Movement - Antonio Vivaldi");
+	MusicTrack Autumn2 = new MusicTrack("music/FourSeasons/Autumn_2nd_movement.wav", "Autumn-2nd Movement - Antonio Vivaldi");
+	MusicTrack Autumn3 = new MusicTrack("music/FourSeasons/Autumn_3rd_movement.wav", "Autumn-3rd Movement - Antonio Vivaldi");
+	MusicTrack Winter1 = new MusicTrack("music/FourSeasons/Winter_1st_movement.wav", "Winter-1st Movement - Antonio Vivaldi");
+	MusicTrack Winter2 = new MusicTrack("music/FourSeasons/Winter_2nd_movement.wav", "Winter-2nd Movement - Antonio Vivaldi");
+	MusicTrack Winter3 = new MusicTrack("music/FourSeasons/Winter_3rd_movement.wav", "Winter-3rd Movement - Antonio Vivaldi");
 
 	//button
 	private JButton btnPlay;
@@ -75,24 +75,24 @@ public class FourSeasons extends JFrame{
 	CircularLinkedList imageList = new CircularLinkedList();
 
 	//Images
-	ImageIcon play = new ImageIcon("MusicPlayer/graphics/PlayResumeButton.png");
-	ImageIcon pause = new ImageIcon("MusicPlayer/graphics/PauseButton.png");
-	ImageIcon resume = new ImageIcon("MusicPlayer/graphics/PlayResumeButton.png");
-	ImageIcon previous = new ImageIcon("MusicPlayer/graphics/PreviousButton.png");
-	ImageIcon next = new ImageIcon("MusicPlayer/graphics/NextButton.png");
-	ImageIcon nightMode = new ImageIcon("MusicPlayer/graphics/NightModeButton.png");
-	ImageIcon nightModeOff = new ImageIcon("MusicPlayer/graphics/NightModeOffButton.png");
-	ImageIcon loopOn = new ImageIcon("MusicPlayer/graphics/LoopOnButton.png");
-	ImageIcon loopOff = new ImageIcon("MusicPlayer/graphics/LoopOffButton.png");
-	ImageIcon play_white = new ImageIcon("MusicPlayer/graphics/PlayResumeButton_white.png");
-	ImageIcon resume_white = new ImageIcon("MusicPlayer/graphics/PlayResumeButton_white.png");
-	ImageIcon pause_white = new ImageIcon("MusicPlayer/graphics/PauseButton_white.png");
-	ImageIcon previous_white = new ImageIcon("MusicPlayer/graphics/PreviousButton_white.png");
-	ImageIcon next_white = new ImageIcon("MusicPlayer/graphics/NextButton_white.png");
-	ImageIcon spring = new ImageIcon("MusicPlayer/graphics/FourSeasons/Spring.png");
-	ImageIcon summer = new ImageIcon("MusicPlayer/graphics/FourSeasons/Summer.png");
-	ImageIcon autumn = new ImageIcon("MusicPlayer/graphics/FourSeasons/Autumn.png");
-	ImageIcon winter = new ImageIcon("MusicPlayer/graphics/FourSeasons/Winter.png");
+	ImageIcon play = new ImageIcon("graphics/PlayResumeButton.png");
+	ImageIcon pause = new ImageIcon("graphics/PauseButton.png");
+	ImageIcon resume = new ImageIcon("graphics/PlayResumeButton.png");
+	ImageIcon previous = new ImageIcon("graphics/PreviousButton.png");
+	ImageIcon next = new ImageIcon("graphics/NextButton.png");
+	ImageIcon nightMode = new ImageIcon("graphics/NightModeButton.png");
+	ImageIcon nightModeOff = new ImageIcon("graphics/NightModeOffButton.png");
+	ImageIcon loopOn = new ImageIcon("graphics/LoopOnButton.png");
+	ImageIcon loopOff = new ImageIcon("graphics/LoopOffButton.png");
+	ImageIcon play_white = new ImageIcon("graphics/PlayResumeButton_white.png");
+	ImageIcon resume_white = new ImageIcon("graphics/PlayResumeButton_white.png");
+	ImageIcon pause_white = new ImageIcon("graphics/PauseButton_white.png");
+	ImageIcon previous_white = new ImageIcon("graphics/PreviousButton_white.png");
+	ImageIcon next_white = new ImageIcon("graphics/NextButton_white.png");
+	ImageIcon spring = new ImageIcon("graphics/FourSeasons/Spring.png");
+	ImageIcon summer = new ImageIcon("graphics/FourSeasons/Summer.png");
+	ImageIcon autumn = new ImageIcon("graphics/FourSeasons/Autumn.png");
+	ImageIcon winter = new ImageIcon("graphics/FourSeasons/Winter.png");
 
 	
 	public FourSeasons() {

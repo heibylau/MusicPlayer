@@ -30,10 +30,10 @@ public class Pop extends JFrame{
     Thread playThread;
     
 	//files
-	MusicTrack track1 = new MusicTrack("MusicPlayer/music/Pop/Thunder.wav", "Thunder - Imagine Dragons");
-	MusicTrack track2 = new MusicTrack("MusicPlayer/music/Pop/Gotye.wav", "Somebody That I Used To Know - Gotye");
-	MusicTrack track3 = new MusicTrack("MusicPlayer/music/Pop/Late_night_talking.wav", "Late Night Talking - Harry Styles");
-	MusicTrack track4 = new MusicTrack("MusicPlayer/music/Pop/Chasing_cars.wav", "Chasing Cars - Snow Patrol");
+	MusicTrack track1 = new MusicTrack("music/Pop/Thunder.wav", "Thunder - Imagine Dragons");
+	MusicTrack track2 = new MusicTrack("music/Pop/Gotye.wav", "Somebody That I Used To Know - Gotye");
+	MusicTrack track3 = new MusicTrack("music/Pop/Late_night_talking.wav", "Late Night Talking - Harry Styles");
+	MusicTrack track4 = new MusicTrack("music/Pop/Chasing_cars.wav", "Chasing Cars - Snow Patrol");
 
 	//button
 	private JButton btnPlay;
@@ -58,24 +58,24 @@ public class Pop extends JFrame{
 	CircularLinkedList imageList = new CircularLinkedList();
 
 	//Images
-	ImageIcon play = new ImageIcon("MusicPlayer/graphics/PlayResumeButton.png");
-	ImageIcon pause = new ImageIcon("MusicPlayer/graphics/PauseButton.png");
-	ImageIcon resume = new ImageIcon("MusicPlayer/graphics/PlayResumeButton.png");
-	ImageIcon previous = new ImageIcon("MusicPlayer/graphics/PreviousButton.png");
-	ImageIcon next = new ImageIcon("MusicPlayer/graphics/NextButton.png");
-	ImageIcon nightMode = new ImageIcon("MusicPlayer/graphics/NightModeButton.png");
-	ImageIcon nightModeOff = new ImageIcon("MusicPlayer/graphics/NightModeOffButton.png");
-	ImageIcon loopOn = new ImageIcon("MusicPlayer/graphics/LoopOnButton.png");
-	ImageIcon loopOff = new ImageIcon("MusicPlayer/graphics/LoopOffButton.png");
-	ImageIcon play_white = new ImageIcon("MusicPlayer/graphics/PlayResumeButton_white.png");
-	ImageIcon resume_white = new ImageIcon("MusicPlayer/graphics/PlayResumeButton_white.png");
-	ImageIcon pause_white = new ImageIcon("MusicPlayer/graphics/PauseButton_white.png");
-	ImageIcon previous_white = new ImageIcon("MusicPlayer/graphics/PreviousButton_white.png");
-	ImageIcon next_white = new ImageIcon("MusicPlayer/graphics/NextButton_white.png");
-	ImageIcon image1 = new ImageIcon("MusicPlayer/graphics/Pop/Thunder.jpg");
-	ImageIcon image2 = new ImageIcon("MusicPlayer/graphics/Pop/Gotye.jpg");
-	ImageIcon image3 = new ImageIcon("MusicPlayer/graphics/Pop/Late_night_talking.jpg");
-	ImageIcon image4 = new ImageIcon("MusicPlayer/graphics/Pop/Chasing_cars.jpeg");
+	ImageIcon play = new ImageIcon("graphics/PlayResumeButton.png");
+	ImageIcon pause = new ImageIcon("graphics/PauseButton.png");
+	ImageIcon resume = new ImageIcon("graphics/PlayResumeButton.png");
+	ImageIcon previous = new ImageIcon("graphics/PreviousButton.png");
+	ImageIcon next = new ImageIcon("graphics/NextButton.png");
+	ImageIcon nightMode = new ImageIcon("graphics/NightModeButton.png");
+	ImageIcon nightModeOff = new ImageIcon("graphics/NightModeOffButton.png");
+	ImageIcon loopOn = new ImageIcon("graphics/LoopOnButton.png");
+	ImageIcon loopOff = new ImageIcon("graphics/LoopOffButton.png");
+	ImageIcon play_white = new ImageIcon("graphics/PlayResumeButton_white.png");
+	ImageIcon resume_white = new ImageIcon("graphics/PlayResumeButton_white.png");
+	ImageIcon pause_white = new ImageIcon("graphics/PauseButton_white.png");
+	ImageIcon previous_white = new ImageIcon("graphics/PreviousButton_white.png");
+	ImageIcon next_white = new ImageIcon("graphics/NextButton_white.png");
+	ImageIcon image1 = new ImageIcon("graphics/Pop/Thunder.jpg");
+	ImageIcon image2 = new ImageIcon("graphics/Pop/Gotye.jpg");
+	ImageIcon image3 = new ImageIcon("graphics/Pop/Late_night_talking.jpg");
+	ImageIcon image4 = new ImageIcon("graphics/Pop/Chasing_cars.jpeg");
 	
 	public Pop() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -30,10 +30,10 @@ public class NCS extends JFrame{
     Thread playThread;
     
 	//files
-	MusicTrack Hope = new MusicTrack("MusicPlayer/music/NCS/Hope.wav", "Hope - Tobu");
-	MusicTrack Infectious = new MusicTrack("MusicPlayer/music/NCS/Infectious.wav", "Infectious - Tobu");
-	MusicTrack Cloud9 = new MusicTrack("MusicPlayer/music/NCS/Cloud9.wav", "Cloud 9 - Itro & Tobu");
-	MusicTrack Candyland = new MusicTrack("MusicPlayer/music/NCS/Candyland.wav", "Candyland - Tobu");
+	MusicTrack Hope = new MusicTrack("music/NCS/Hope.wav", "Hope - Tobu");
+	MusicTrack Infectious = new MusicTrack("music/NCS/Infectious.wav", "Infectious - Tobu");
+	MusicTrack Cloud9 = new MusicTrack("music/NCS/Cloud9.wav", "Cloud 9 - Itro & Tobu");
+	MusicTrack Candyland = new MusicTrack("music/NCS/Candyland.wav", "Candyland - Tobu");
 
 	//button
 	private JButton btnPlay;
@@ -58,24 +58,24 @@ public class NCS extends JFrame{
 	CircularLinkedList imageList = new CircularLinkedList();
 
 	//Images
-	ImageIcon play = new ImageIcon("MusicPlayer/graphics/PlayResumeButton.png");
-	ImageIcon pause = new ImageIcon("MusicPlayer/graphics/PauseButton.png");
-	ImageIcon resume = new ImageIcon("MusicPlayer/graphics/PlayResumeButton.png");
-	ImageIcon previous = new ImageIcon("MusicPlayer/graphics/PreviousButton.png");
-	ImageIcon next = new ImageIcon("MusicPlayer/graphics/NextButton.png");
-	ImageIcon nightMode = new ImageIcon("MusicPlayer/graphics/NightModeButton.png");
-	ImageIcon nightModeOff = new ImageIcon("MusicPlayer/graphics/NightModeOffButton.png");
-	ImageIcon loopOn = new ImageIcon("MusicPlayer/graphics/LoopOnButton.png");
-	ImageIcon loopOff = new ImageIcon("MusicPlayer/graphics/LoopOffButton.png");
-	ImageIcon play_white = new ImageIcon("MusicPlayer/graphics/PlayResumeButton_white.png");
-	ImageIcon resume_white = new ImageIcon("MusicPlayer/graphics/PlayResumeButton_white.png");
-	ImageIcon pause_white = new ImageIcon("MusicPlayer/graphics/PauseButton_white.png");
-	ImageIcon previous_white = new ImageIcon("MusicPlayer/graphics/PreviousButton_white.png");
-	ImageIcon next_white = new ImageIcon("MusicPlayer/graphics/NextButton_white.png");
-	ImageIcon hope = new ImageIcon("MusicPlayer/graphics/NCS/Hope.jpg");
-	ImageIcon infectious = new ImageIcon("MusicPlayer/graphics/NCS/Infectious.jpg");
-	ImageIcon cloud9 = new ImageIcon("MusicPlayer/graphics/NCS/Cloud9.jpg");
-	ImageIcon candyland = new ImageIcon("MusicPlayer/graphics/NCS/Candyland.jpg");
+	ImageIcon play = new ImageIcon("graphics/PlayResumeButton.png");
+	ImageIcon pause = new ImageIcon("graphics/PauseButton.png");
+	ImageIcon resume = new ImageIcon("graphics/PlayResumeButton.png");
+	ImageIcon previous = new ImageIcon("graphics/PreviousButton.png");
+	ImageIcon next = new ImageIcon("graphics/NextButton.png");
+	ImageIcon nightMode = new ImageIcon("graphics/NightModeButton.png");
+	ImageIcon nightModeOff = new ImageIcon("graphics/NightModeOffButton.png");
+	ImageIcon loopOn = new ImageIcon("graphics/LoopOnButton.png");
+	ImageIcon loopOff = new ImageIcon("graphics/LoopOffButton.png");
+	ImageIcon play_white = new ImageIcon("graphics/PlayResumeButton_white.png");
+	ImageIcon resume_white = new ImageIcon("graphics/PlayResumeButton_white.png");
+	ImageIcon pause_white = new ImageIcon("graphics/PauseButton_white.png");
+	ImageIcon previous_white = new ImageIcon("graphics/PreviousButton_white.png");
+	ImageIcon next_white = new ImageIcon("graphics/NextButton_white.png");
+	ImageIcon hope = new ImageIcon("graphics/NCS/Hope.jpg");
+	ImageIcon infectious = new ImageIcon("graphics/NCS/Infectious.jpg");
+	ImageIcon cloud9 = new ImageIcon("graphics/NCS/Cloud9.jpg");
+	ImageIcon candyland = new ImageIcon("graphics/NCS/Candyland.jpg");
 	
 	public NCS() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

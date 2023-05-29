@@ -55,7 +55,7 @@ public class PlayerFrame extends JFrame {
 
 		
 		//Four Seasons playlist button
-		ImageIcon fs = new ImageIcon("MusicPlayer/graphics/FourSeasons/Four_seasons_playlist_cover.png");
+		ImageIcon fs = new ImageIcon("graphics/FourSeasons/Four_seasons_playlist_cover.png");
 		btnFourSeasons = new JButton(fs);
 		btnFourSeasons.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
@@ -71,7 +71,7 @@ public class PlayerFrame extends JFrame {
 		contentPane.add(lblFourSeasons);
 		
 		//Pop playlist button
-		ImageIcon pop = new ImageIcon("MusicPlayer/graphics/Pop/Pop_playlist_cover.jpeg");
+		ImageIcon pop = new ImageIcon("graphics/Pop/Pop_playlist_cover.jpeg");
 		btnPop = new JButton(pop);
 		btnPop.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -88,7 +88,7 @@ public class PlayerFrame extends JFrame {
 		contentPane.add(lblPop);
 
 		//NCS playlist button
-		ImageIcon ncs = new ImageIcon("MusicPlayer/graphics/NCS/NCS_playlist_cover.png");
+		ImageIcon ncs = new ImageIcon("graphics/NCS/NCS_playlist_cover.png");
 		btnNCS = new JButton(ncs);
 		btnNCS.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -104,7 +104,7 @@ public class PlayerFrame extends JFrame {
 		contentPane.add(lblNCS);
 		
 		//Tango button
-		ImageIcon tango = new ImageIcon("MusicPlayer/graphics/Tango/Tango_playlist_cover.jpg");
+		ImageIcon tango = new ImageIcon("graphics/Tango/Tango_playlist_cover.jpg");
 		btnTango = new JButton(tango);
 		btnTango.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -121,7 +121,7 @@ public class PlayerFrame extends JFrame {
 		contentPane.add(lblTango);
 
 		//Background
-		ImageIcon def = new ImageIcon("MusicPlayer/background/Default_background.png");
+		ImageIcon def = new ImageIcon("background/Default_background.png");
 		defaultBackground = new JLabel(def);
 		defaultBackground.setBounds(0, 0, 400, 600);
 		contentPane.add(defaultBackground);
